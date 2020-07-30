@@ -5,17 +5,25 @@ endif
 set encoding=utf-8
 set rnu
 set list
-set listchars=tab:\|\-
+"set listchars=tab:\|\- " Set Indent line
 set clipboard=unnamed
 let mapleader = " "
 
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 
+" Install Plugin with vim-plug
 Plug 'easymotion/vim-easymotion'
 Plug 'roman/golden-ratio'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-surround'
+Plug 'preservim/nerdcommenter'
+Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+Plug 'junegunn/fzf.vim'
+Plug 'yggdroot/indentline'
+Plug 'terryma/vim-multiple-cursors'
 
 " Disable
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -24,7 +32,9 @@ Plug 'vim-airline/vim-airline'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
+" ---------------------------------- "
 " Config Kite
+" ---------------------------------- "
 let g:kite_supported_languages = ['python', 'javascript'] " Set support languages
 let g:kite_tab_complete = 1 " Use tab to complete
 " Map gK to show examples and docs for the code under the cursor
@@ -32,7 +42,9 @@ nmap <silent> <buffer> gK <Plug>(kite-docs)
 "set completeopt+=preview " Show docs in the preview window
 "autocmd CompleteDone * if !pumvisible() | pclose | endif " Close preview window once completion has been inserted
 
+" ---------------------------------- "
 " Config NERDTree
+" ---------------------------------- "
 map <Leader>n :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 " Auto toggle NERDTree at current directory when open vim inside workspace or working directory
@@ -44,5 +56,19 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
+" ---------------------------------- "
 " Config Airline Powerline
-let g:airline_powerline_fonts = 1
+" ---------------------------------- "
+let g:airline_powerline_fonts = 1 " Enable Powerline font
+let g:airline#extensions#tabline#enabled = 1 " Enable Tabline
+
+" ---------------------------------- "
+" Config Indentline
+" ---------------------------------- "
+let g:indentLine_enabled = 1
+
+" ---------------------------------- "
+" Config FZF
+" ---------------------------------- "
+" Map <C-p> to use Fuzzy finder (Files)
+nmap <C-p> :Files<CR>
