@@ -15,7 +15,7 @@ $PSReadline = Get-InstalledModule -Name "PSReadline"
 # Check Powershell Edition, Core edition and Desktop edition maybe need to have different modules
 $Edition = $PSVersionTable.PSEdition
 # Check Windows-Screenfetch module (https://github.com/JulianChow94/Windows-screenFetch)
-$WindowsScreenfetch = Get-InstalledModule -Name "windows-screenfetch"
+$WindowsScreenfetch = Find-Module -Name "windows-screenfetch"
 
 if ($PoshGit.Count -eq 0) {
 	Install-Module posh-git -Scope CurrentUser -Force
