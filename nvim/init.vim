@@ -2,7 +2,11 @@ if &compatible
 	set nocompatible " Be iMproved
 endif
 set encoding=utf-8
-set rnu
+set number relativenumber
+" Enable autocompletion
+set wildmode=longest,list,full
+" Splits open at bottom and right, unlike vim default
+set splitbelow splitright
 set list
 "set listchars=tab:\|\- " Set Indent line
 set clipboard=unnamed
