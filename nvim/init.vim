@@ -19,69 +19,11 @@ source $HOME/.config/nvim/vim-plug/plugins.vim
 " Plugins Configuration
 " ---------------------------------- "
 
-" ---------------------------------- "
-" Config NERDTree
-" ---------------------------------- "
-map <Leader>n :NERDTreeToggle<CR>
-autocmd StdinReadPre * let s:std_in=1
-" Auto toggle NERDTree at current directory when open vim inside workspace or working directory
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd'.argv()[0] | endif
-" Auto toggle NERDTree when open vim without a file like ' vim '
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" Close vim when have no any tab except NERDTree and current tab
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-
-" ---------------------------------- "
-" Config Kite
-" ---------------------------------- "
-let g:kite_supported_languages = ['python', 'javascript'] " Set support languages
-let g:kite_tab_complete = 1 " Use tab to complete
-" Map gK to show examples and docs for the code under the cursor
-nmap <silent> <buffer> gK <Plug>(kite-docs)
-"set completeopt+=preview " Show docs in the preview window
-"autocmd CompleteDone * if !pumvisible() | pclose | endif " Close preview window once completion has been inserted
-
-" ---------------------------------- "
-" Config Airline Powerline
-" ---------------------------------- "
-let g:airline_powerline_fonts = 1 " Enable Powerline font
-let g:airline#extensions#tabline#enabled = 1 " Enable Tabline
-" Map <leader>number to select the tab
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-
-" ---------------------------------- "
-" Config Indentline
-" ---------------------------------- "
-let g:indentLine_enabled = 1
-
-" ---------------------------------- "
-" Config FZF
-" ---------------------------------- "
-" Map <C-p> to use Fuzzy finder (Files)
-nmap <C-p> :Files<CR>
-
-" ---------------------------------- "
-" Config Incsearch x Fuzzy x Easymotion
-" ---------------------------------- "
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzy#converter()],
-  \   'modules': [incsearch#config#easymotion#module()],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
-" Used easy fuzzy search by call /<keyword>
-noremap <silent><expr> / incsearch#go(<SID>config_easyfuzzymotion())
+source $HOME/.config/nvim/plug-config/nerdtree.vim
+source $HOME/.config/nvim/plug-config/airline.vim
+source $HOME/.config/nvim/plug-config/indent-line.vim
+source $HOME/.config/nvim/plug-config/fzf.vim
+source $HOME/.config/nvim/plug-config/easy-fuzzy-motion.vim
+source $HOME/.config/nvim/plug-config/rainbow-parentheses.vim
+source $HOME/.config/nvim/plug-config/gitgutter.vim
+source $HOME/.config/nvim/plug-config/coc.vim
