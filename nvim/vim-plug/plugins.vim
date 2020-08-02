@@ -14,7 +14,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'yggdroot/indentline'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
-
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch-easymotion.vim' " Easy Fuzzy Search
 "" Disable
 ""Plug 'neoclide/coc.nvim', {'branch': 'release'}
 ""Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
