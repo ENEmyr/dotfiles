@@ -31,4 +31,6 @@ source $HOME/.config/nvim/plug-config/coc.vim
 " ---------------------------------- "
 " Fixes mouse issues using Alacritty
 " ---------------------------------- "
-set ttymouse=sgr
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
