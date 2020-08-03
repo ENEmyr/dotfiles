@@ -27,3 +27,8 @@ source $HOME/.config/nvim/plug-config/easy-fuzzy-motion.vim
 source $HOME/.config/nvim/plug-config/rainbow-parentheses.vim
 source $HOME/.config/nvim/plug-config/gitgutter.vim
 source $HOME/.config/nvim/plug-config/coc.vim
+
+" ---------------------------------- "
+" Fixes mouse issues using Alacritty
+" ---------------------------------- "
+set ttymouse=sgr
