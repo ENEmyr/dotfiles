@@ -33,4 +33,4 @@ source $HOME/.config/nvim/plug-config/coc.vim
 " ---------------------------------- "
 if has("mouse_sgr")
     set ttymouse=sgr
-else
+end
