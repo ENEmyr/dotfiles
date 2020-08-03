@@ -2,6 +2,7 @@ if &compatible
 	set nocompatible " Be iMproved
 endif
 set encoding=utf-8
+set guifont=CaskaydiaCove\ Nerd\ Font:h10
 set number relativenumber
 " Enable autocompletion
 set wildmode=longest,list,full

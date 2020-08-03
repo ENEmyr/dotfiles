@@ -118,7 +118,7 @@ font:
     # family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    family: Hack
+    family: "CaskaydiaCove Nerd Font"
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -221,8 +221,8 @@ colors:
   primary:
     #background: '0x292d3e'
     #foreground: '0xbbc5ff'
-    background: '0x2b2a2a'
-    foreground: '0xd6d6d6'
+    background: '0x272a34'
+    foreground: '0xffffff'
 
     # Bright and dim foreground colors
     #
@@ -236,9 +236,9 @@ colors:
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,
   # the cursor color will be the inverse of the cell color.
-  #cursor:
+  cursor:
   #  text: '0x000000'
-  #  cursor: '0xffffff'
+    cursor: '0xffffff'
 
   # Selection colors
   #
@@ -251,24 +251,40 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x292d3e'
-    red:     '0xf07178'
-    green:   '0xc3e88d'
-    yellow:  '0xffcb6b'
-    blue:    '0x82aaff'
-    magenta: '0xc792ea'
-    cyan:    '0x89ddff'
-    white:   '0xd0d0d0'
+    #black:   '0x292d3e'
+    #red:     '0xf07178'
+    #green:   '0xc3e88d'
+    #yellow:  '0xffcb6b'
+    #blue:    '0x82aaff'
+    #magenta: '0xc792ea'
+    #cyan:    '0x89ddff'
+    #white:   '0xd0d0d0'
+    black:   '0x1f2229'
+    red:     '0xd41919'
+    green:   '0x5ebdab'
+    yellow:  '0xfea44c'
+    blue:    '0x367bf0'
+    magenta: '0xbf2e5d'
+    cyan:    '0x49aee6'
+    white:   '0xe6e6e6'
 
   # Bright colors
   bright:
-    black:   '0x434758'
-    red:     '0xff8b92'
-    green:   '0xddffa7'
-    yellow:  '0xffe585'
-    blue:    '0x9cc4ff'
-    magenta: '0xe1acff'
-    cyan:    '0xa3f7ff'
+    #black:   '0x434758'
+    #red:     '0xff8b92'
+    #green:   '0xddffa7'
+    #yellow:  '0xffe585'
+    #blue:    '0x9cc4ff'
+    #magenta: '0xe1acff'
+    #cyan:    '0xa3f7ff'
+    #white:   '0xffffff'
+    black:   '0x8c42ab'
+    red:     '0xec0101'
+    green:   '0x47d4b9'
+    yellow:  '0xff8a18'
+    blue:    '0x277fff'
+    magenta: '0xd71655'
+    cyan:    '0x05a1f7'
     white:   '0xffffff'
 
   # Dim colors
