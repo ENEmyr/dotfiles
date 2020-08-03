@@ -20,6 +20,9 @@ Plug 'haya14busa/incsearch-easymotion.vim' " Easy Fuzzy Search
 Plug 'junegunn/rainbow_parentheses.vim' " Add rainbow parentheses
 Plug 'airblade/vim-gitgutter' " Show git diff
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " Semantic highlightings for Python need to install pynvim via pip see more : https://vimawesome.com/plugin/semshi
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " Syntax highlight in NERDTree
+Plug 'ryanoasis/vim-devicons' " Provide icons for each filetypes
 
 "" Disable
 ""Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
