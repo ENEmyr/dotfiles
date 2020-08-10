@@ -194,6 +194,7 @@ alias cp="cp -i"                                                # Confirm before
 alias df='df -h'                                                # Human-readable sizes
 alias free='free -m'                                            # Show sizes in MB
 alias gitu='git add . && git commit && git push'
+alias lws='sh /home/enemy/.config/i3/load_workspace.sh'
 
 # Use autosuggestion
 source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -211,8 +212,8 @@ bindkey '^[[B' history-substring-search-down
 plugins+=(zsh-completions)
 source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -U compinit && compinit
-if [ "$TMUX" = "" ]; then tmux; fi # Load Tmux by default
-screenfetch # Run screenfetch at startup
+#if [ "$TMUX" = "" ]; then tmux; fi # Load Tmux by default
+#screenfetch # Run screenfetch at startup
 RPROMPT='$(battery_pct_prompt)'
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
