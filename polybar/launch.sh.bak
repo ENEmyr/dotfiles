@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+#Terminate already running bar instance
+killall -q polybar
+
+#Launch Bar1 and Bar2
+echo "---" tee -a /tmp/polybar1.log
+polybar enemybar >> /tmp/polybar1.log 2>&1 &
+echo "Bars launched..."
