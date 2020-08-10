@@ -27,7 +27,9 @@ exec_always feh --bg-scale ~/Pictures/Wallpapers/cropped-20200609_023450.jpg
 
 exec_always --no-startup-id "sh ~/.config/polybar/launch.sh"
 
-exec_always --no-startup-id i3-msg "workspace ; exec alacritty -e zsh -c 'screenfetch && zsh'" 
+#exec_always --no-startup-id i3-msg "workspace ; exec alacritty -e zsh -c 'screenfetch && zsh'" 
+# Change startup terminal to Urxvt because Alacritty can not display image without loop (--loop)
+exec_always --no-startup-id i3-msg "workspace ; exec urxvt -e zsh -c 'neofetch --w3m $HOME/Pictures/Wallpapers/minatoaqua1.png && zsh'" 
 
 
 
