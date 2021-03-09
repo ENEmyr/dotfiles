@@ -42,11 +42,14 @@ super + g
 alt + Tab
 	sh ~/.config/sxhkd/switchmonitor.sh
 # Move node to another monitor
-alt + {h, l}
-	bspc node -m {DVI-D-0, HDMI-0} --follow
+alt + {h, l, k}
+	bspc node -m {HDMI-0, DP-0, DVI-D-0} --follow
 # Swap focused desktop to desktop that is lied on 2nd monitor
 alt + {6, 7, 8, 9}
 	bspc desktop -s {6, 7, 8, 9}
+# Swap focused desktop to desktop that is lied on 3rd monitor
+alt + {1, 2, 3, 4, 5}
+	bspc desktop -s {1, 2, 3, 4, 5}
 
 # STATE/FLAGS
 #

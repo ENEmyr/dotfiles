@@ -15,7 +15,13 @@ polybar -q main -c "$DIR"/config.ini &
 sleep 1
 
 # Launch 2nd bar if 2nd monitor is connected
-second_monitor=$(xrandr --query | grep 'DVI-D-0')
+second_monitor=$(xrandr --query | grep 'HDMI-0')
 if [[ $second_monitor = *connected* ]]; then
-	polybar -q side -c "$DIR"/config.ini &
+	polybar -q second -c "$DIR"/config.ini &
+fi
+
+# Launch 3rd bar if 3rd monitor is connected
+third_monitor=$(xrandr --query | grep 'DVI-D-0')
+if [[ $third_monitor = *connected* ]]; then
+	polybar -q third -c "$DIR"/config.ini &
 fi
