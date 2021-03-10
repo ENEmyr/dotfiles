@@ -1,0 +1,3 @@
+clear lock
+keycode 66 = grave asciitilde underscore percent
+keycode 49 = Caps_Lock NoSymbol Caps_Lock
