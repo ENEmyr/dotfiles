@@ -65,5 +65,5 @@ get_session(){
 
 exec $(get_session "$1")
 
-# swap grave tilde key to caplock
-[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+# swap grave tilde key to caplock (set in bspwm config instead)
+# [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
