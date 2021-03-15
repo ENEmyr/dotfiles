@@ -25,6 +25,7 @@ function nvm
 end
 
 # alias
+abbr lock "sh ~/Scripts/lock.sh"
 abbr scg "nvim ~/.config/fish/config.fish"
 abbr awscg "nvim ~/.config/awesome/rc.lua"
 abbr i3cg "nvim ~/.i3/config"
@@ -38,6 +39,12 @@ abbr cdc "cd /mnt/WindowsC"
 abbr cdd "cd /mnt/WindowsD"
 abbr cde "cd /mnt/WindowsE"
 abbr r "ranger"
+abbr to "touch"
+abbr rwmo "sudo mount -o remount, rw /mnt/WindowsE && sudo mount -o remount, rw /mnt/WindowsD && sudo mount -o remount, rw /mnt/WindowsC"
+# swap caps with grave
+abbr caps "xmodmap ~/.Xmodmap &"
+abbr xkb "setxkbmap -rules evdev -model pc104 -layout us,th -option grp:alt_shift_toggle &"
+abbr lzg "lazygit"
 
 
 
