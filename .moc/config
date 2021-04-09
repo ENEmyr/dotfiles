@@ -205,7 +205,7 @@ StartInMusicDir = yes
 #
 # Example:    Theme = laras_theme
 #
-Theme = manjaro
+Theme = nightshade
 
 # The theme used when running on an xterm.
 #

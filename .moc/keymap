@@ -79,7 +79,6 @@ toggle_show_format    = ^f
 toggle_menu           = TAB
 toggle_layout         = L
 toggle_hidden_files   = H
-next_search           = ^g ^n
 show_lyrics           = ^l
 theme_menu            = T
 help                  = ?
