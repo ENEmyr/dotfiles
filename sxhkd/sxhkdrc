@@ -42,7 +42,7 @@ super + g
 alt + Tab
 	sh ~/.config/sxhkd/switchmonitor.sh
 # Focus selected monitor.
-ctrl + {h, j, k, l} 
+ctrl + alt + {h, j, k, l} 
 	bspc monitor -f {west,south,north,east} --follow
 # Move focus desktop(all nodes) to selected monitor
 ctrl + shift + {h, j, k, l} 
@@ -70,7 +70,7 @@ super + ctrl + {m,x,y,z}
 
 # FOCUS/SWAP
 #
-# focus the node in the given direction
+# focus/swap the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
