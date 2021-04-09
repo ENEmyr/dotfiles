@@ -13,6 +13,7 @@ set -xg PYTHONDONTWRITEBYTECODE 1
 
 fish_vi_key_bindings
 function fish_greeting
+    neofetch
 	nvm use node >> /dev/null 2>&1 # Use Node at startup
 	# Apply pywal color scheme to alacritty
 	#cat ~/.cache/wal/sequences &
@@ -45,6 +46,9 @@ abbr rwmo "sudo mount -o remount, rw /mnt/WindowsE && sudo mount -o remount, rw 
 abbr caps "xmodmap ~/.Xmodmap &"
 abbr xkb "setxkbmap -rules evdev -model pc104 -layout us,th -option grp:alt_shift_toggle &"
 abbr lzg "lazygit"
+abbr mixer "alsamixer"
+abbr memo "nvim ~/Documents/Memo.wiki"
+abbr plbr "polybar-msg cmd restart"
 
 
 
