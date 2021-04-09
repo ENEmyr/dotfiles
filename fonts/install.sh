@@ -1,14 +1,20 @@
-#!/usr/bin/bash
+#!/usr/bin/sh
 
-yay -Sy ttf-iosevka
+echo 'Installing fonts'
+
+paru -Sy ttf-iosevka
 
 sudo chmod 555 OTF/
 sudo chmod 555 TTF/
 
-cp -rf OTF/ /usr/share/fonts
-cp -rf TTF/ /usr/share/fonts
+sudo cp -rf OTF/ /usr/share/fonts
+sudo cp -rf TTF/ /usr/share/fonts
 
-cp -rf OTF/ ~/.local/share/fonts
-cp -rf TTF/ ~/.local/share/fonts
+[ ! -d "$HOME/.local" ] && mkdir $HOME/.local
+[ ! -d "$HOME/.local/share" ] && mkdir $HOME/.local/share
+[ ! -d "$HOME/.local/share/fonts" ] && mkdir $HOME/.local/share/fonts
 
-sudo fc-cahce
+sudo cp -rf OTF/ $HOME/.local/share/fonts
+sudo cp -rf TTF/ $HOME/.local/share/fonts
+
+sudo fc-cache
