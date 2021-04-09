@@ -37,6 +37,7 @@ PV_IMAGE_ENABLED="${5}"  # 'True' if image previews are enabled, 'False' otherwi
 
 FILE_EXTENSION="${FILE_PATH##*.}"
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
+FILE_NAME="${FILE_PATH%.*}"
 
 ## Settings
 HIGHLIGHT_SIZE_MAX=262143  # 256KiB
@@ -115,6 +116,9 @@ handle_extension() {
             mediainfo "${FILE_PATH}" && exit 5
             exiftool "${FILE_PATH}" && exit 5
             ;; # Continue with next handler on failure
+        ## Presentation
+        # ppt|pptx)
+        #     unoconv -f pdf "${FILE_PATH}" && exit 5
     esac
 }
 
@@ -169,6 +173,16 @@ handle_image() {
                      -- "${FILE_PATH}" "${IMAGE_CACHE_PATH%.*}" \
                 && exit 6 || exit 1;;
 
+		## Presentation
+        application/pttx|application/ptt)
+			unoconv -f pdf "${FILE_PATH}"; wait;
+            pdftoppm -f 1 -l 1 \
+                     -scale-to-x "${DEFAULT_SIZE%x*}" \
+                     -scale-to-y -1 \
+                     -singlefile \
+                     -jpeg -tiffcompression jpeg \
+                     -- "${FILE_NAME}.pdf" "${IMAGE_CACHE_PATH%.*}" \
+                ; wait; rm "${FILE_NAME}.pdf" &&exit 6 || exit 1;;
 
         ## ePub, MOBI, FB2 (using Calibre)
         # application/epub+zip|application/x-mobipocket-ebook|\
