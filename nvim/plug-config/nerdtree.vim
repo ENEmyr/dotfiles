@@ -2,7 +2,7 @@
 " Config NERDTree
 " ---------------------------------- "
 
-map <Leader>n :NERDTreeToggle<CR>
+map <Leader>e :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 " Auto toggle NERDTree at current directory when open vim inside workspace or working directory
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd'.argv()[0] | endif
