@@ -36,6 +36,12 @@ vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 -- vim.o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
 -- vim.o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
 -- vim.o.guifont = "SauceCodePro Nerd Font:h17"
-vim.o.guifont = "Caskaydia Cove Nerd Font:h17"
+-- vim.o.guifont = "Caskaydia\\ Cove\\ Nerd\\ Font:h13"
+vim.o.guifont = "CascadiaCode\\ NF:h13"
+
+-- Neovide Configuration
+vim.api.nvim_set_var('neovide_refresh_rate', 144)
+vim.api.nvim_set_var('neovide_transparency', 0.9)
+vim.api.nvim_set_var('neovide_cursor_vfx_mode', 'wireframe') -- railgun, torpedo, pixiedust, sonicboom, ripple, wireframe
 
 -- vim.o.guifont = "JetBrains\\ Mono\\ Regular\\ Nerd\\ Font\\ Complete"
