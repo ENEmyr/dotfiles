@@ -114,7 +114,7 @@ git clone https://aur.archlinux.org/paru.git
 cd paru && sudo makepkg -si
 cd .. && sudo rm -rf paru
 echo 'Installing packages from AUR'
-paru -S alacritty audacity discord spotify obs-studio flameshot keepass nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin --needed --noconfirm
+paru -S alacritty audacity discord spotify obs-studio flameshot keepass nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git --needed --noconfirm
 
 cp -rf $dotpath'/bspwm' $HOME'/.config'
 cp -rf $dotpath'/ranger' $HOME'/.config'
