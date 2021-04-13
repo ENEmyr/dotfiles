@@ -34,6 +34,7 @@ abbr qtcg "nvim ~/.config/qtile/config.py"
 abbr bscg "nvim ~/.config/bspwm/bspwmrc"
 abbr sxcg "nvim ~/.config/sxhkd/sxhkdrc"
 abbr v "$EDITOR"
+abbr vi "sh ~/Application/neovide_launcher"
 abbr term "alacritty"
 abbr free "free -m"
 abbr cdc "cd /mnt/WindowsC"
@@ -49,6 +50,8 @@ abbr lzg "lazygit"
 abbr mixer "alsamixer"
 abbr memo "nvim ~/Documents/Memo.wiki"
 abbr plbr "polybar-msg cmd restart"
+# synchronize clock with the network
+abbr clocksync "sudo ntpd -qg"
 
 
 
