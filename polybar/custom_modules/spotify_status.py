@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/enemy/anaconda3/bin python
 
 import sys
 import dbus
