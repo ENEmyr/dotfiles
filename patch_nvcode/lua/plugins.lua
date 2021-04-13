@@ -57,8 +57,8 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
 
     -- Status Line and Bufferline
-    -- use { 'glepnir/galaxyline.nvim', config = my('nv-galaxyline') }
-    use { 'glepnir/galaxyline.nvim', config = function() require'nv-galaxyline' end } -- inline fn alternative
+    use { 'glepnir/galaxyline.nvim' }
+    -- use { 'glepnir/galaxyline.nvim', config = function() require'nv-galaxyline' end } -- inline fn alternative
     use 'romgrk/barbar.nvim'
 
     -- Telescope
@@ -134,7 +134,10 @@ return require('packer').startup(function(use)
     use {'kkoomen/vim-doge', run = ':call doge#install()'}
 
 	-- Own plugins
-	use 'roman/golden-ratio'
+	-- use 'roman/golden-ratio'
+    -- use 'camspiers/animate.vim'
+    -- use 'camspiers/lens.vim' -- Plugin that use for automatic resize windows like golden-ratio but the resized window ratio it's not a golden ratio
+	use 'dm1try/golden_size' -- Replace golden-ratio, to fix the problem that golden-ratio keep resize floating windows and affect to some plugin like telescope
 	use 'easymotion/vim-easymotion'
 	use 'terryma/vim-multiple-cursors'
 	use 'haya14busa/incsearch.vim'
