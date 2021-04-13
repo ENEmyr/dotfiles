@@ -106,7 +106,7 @@ read answer
 
 echo 'Installing packages'
 # maybe need to add more in order to build a picom with mesa
-sudo pacman -S base-devel pkg-config git feh catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-oprenjdk jq neofetch vim nodejs npm luarocks meson nvidia-dkms nvidia-settings python-sphinx ranger rofi alsa tree-sitter ueberzug unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox --needed --noconfirm
+sudo pacman -S base-devel pkg-config git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-oprenjdk jq neofetch vim nodejs npm luarocks meson nvidia-dkms nvidia-settings python-sphinx ranger rofi alsa tree-sitter ueberzug unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus --needed --noconfirm
 configgit
 
 echo 'Installing Paru for managing AUR packages'
@@ -114,7 +114,7 @@ git clone https://aur.archlinux.org/paru.git
 cd paru && sudo makepkg -si
 cd .. && sudo rm -rf paru
 echo 'Installing packages from AUR'
-paru -S alacritty audacity discord spotify obs-studio flameshot keepass nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git --needed --noconfirm
+paru -S alacritty audacity discord spotify obs-studio flameshot keepass nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git spotifyd spotifyd-runit spotify-dev spotify-tui --needed --noconfirm
 
 cp -rf $dotpath'/bspwm' $HOME'/.config'
 cp -rf $dotpath'/ranger' $HOME'/.config'
