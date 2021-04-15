@@ -37,7 +37,7 @@ throttle.global_up.max_rate.set_kb = 100
 
 # Default directory to save the downloaded torrents.
 #
-directory.default.set = /mnt/WindowsE/Download
+directory.default.set = /mnt/WindowsE/Downloads
 
 # Default session directory. Make sure you don't run multiple instance
 # of rTorrent using the same session directory. Perhaps using a
