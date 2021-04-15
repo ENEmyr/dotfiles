@@ -106,7 +106,7 @@ read answer
 
 echo 'Installing packages'
 # maybe need to add more in order to build a picom with mesa
-sudo pacman -S base-devel pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-oprenjdk jq neofetch vim nodejs npm luarocks meson nvidia-dkms nvidia-settings python-sphinx ranger rofi alsa tree-sitter ueberzug unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent --needed --noconfirm
+sudo pacman -S base-devel pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-oprenjdk jq neofetch vim nodejs npm luarocks meson nvidia-dkms nvidia-settings python-sphinx ranger rofi alsa tree-sitter ueberzug unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat --needed --noconfirm
 configgit
 
 echo 'Installing Paru for managing AUR packages'

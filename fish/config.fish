@@ -7,6 +7,7 @@ export EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 # Set Alacritty as default term
 export TERM=alacritty
+export BAT_THEME='Coldark-Dark'
 
 set -xg PYTHONDONTWRITEBYTECODE 1
 
@@ -25,7 +26,7 @@ function nvm
 	bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 end
 
-# alias
+# abbreviations
 abbr lock "sh ~/Scripts/lock.sh"
 abbr scg "nvim ~/.config/fish/config.fish"
 abbr awscg "nvim ~/.config/awesome/rc.lua"
@@ -53,27 +54,21 @@ abbr plbr "polybar-msg cmd restart"
 # synchronize clock with the network
 abbr clocksync "sudo ntpd -qg"
 
-
+# aliases
+if type -q exa # if already have exa installed (sudo pacman -S exa)
+    if git rev-parse --is-inside-work-tree &>/dev/null # if current working dir is in git repo
+        alias ll "exa --long --all --group --header --git --icons"
+        alias lt "exa --long --all --group --header --git --icons --tree --level $argv"
+    else
+        alias ll "exa --long --all --group --header --icons"
+        alias lt "exa --long --all --group --header --icons --tree --level $argv"
+    end
+end
+if type -q bat
+	alias cat "bat" # bat is the smarter cat with syntax highlighting
+end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init fish' !!
 status is-interactive && eval /home/enemy/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
-
-# Spacefish setup
-#set SPACEFISH_PROMPT_ORDER dir user host
-#set SPACEFISH_RPROMPT_ORDER git node exec_time time
-#set SPACEFISH_DIR_SHOW true
-#set SPACEFISH_PROMPT_ADD_NEWLINE true
-#set SPACEFISH_PROMPT_SEPARATE_LINE true
-#set SPACEFISH_PROMPT_FIST_PREFIX_SHOW true
-#set SPACEFISH_TIME_SHOW true
-#set SPACEFISH_DATE_SHOW false
-#set SPACEFISH_TIME_PREFIX  
-#set SPACEFISH_USER_SHOW true
-#set SPACEFISH_USER_PREFIX  
-#set SPACEFISH_USER_COLOR 5fd7ff
-#set SPACEFISH_DIR_PREFIX  
-#set SPACEFISH_HOST_SHOW_FULL true
-#set SPACEFISH_HOST_PREFIX  
-#set SPACEFISH_VI_MODE_SHOW true
