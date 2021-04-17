@@ -606,7 +606,7 @@ key_bindings:
     #  - { key: Copy,                     action: Copy                             }
     #  - { key: L,         mods: Control, action: ClearLogNotice                   }
     #  - { key: L,         mods: Control, chars: "\x0c"                            }
-     - { key: U,    mods: Control,   action: ScrollPageUp }
-     - { key: D,  mods: Control,   action: ScrollPageDown }
+     - { key: U,    mods: Alt,   action: ScrollPageUp }
+     - { key: D,  mods: Alt,   action: ScrollPageDown }
     #  - { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
-     - { key: G,       mods: Shift,   action: ScrollToBottom }
+     - { key: G,       mods: Alt,   action: ScrollToBottom }
