@@ -6,7 +6,7 @@
 export EDITOR='/usr/bin/nvim'
 export VISUAL='/usr/bin/nvim'
 # Set Alacritty as default term
-export TERM=alacritty
+export TERM=kitty
 export BAT_THEME='Coldark-Dark'
 
 set -xg PYTHONDONTWRITEBYTECODE 1
@@ -34,6 +34,7 @@ abbr i3cg "nvim ~/.i3/config"
 abbr qtcg "nvim ~/.config/qtile/config.py"
 abbr bscg "nvim ~/.config/bspwm/bspwmrc"
 abbr sxcg "nvim ~/.config/sxhkd/sxhkdrc"
+abbr kcg "nvim ~/.config/kitty/kitty.conf"
 abbr v "$EDITOR"
 abbr vi "sh ~/Application/neovide_launcher"
 abbr term "alacritty"
@@ -57,18 +58,28 @@ abbr clocksync "sudo ntpd -qg"
 # aliases
 if type -q exa # if already have exa installed (sudo pacman -S exa)
     if git rev-parse --is-inside-work-tree &>/dev/null # if current working dir is in git repo
-        alias ll "exa --long --all --group --header --git --icons"
-        alias lt "exa --long --all --group --header --git --icons --tree --level $argv"
+        alias ll "exa --long --group --header --git --icons"
+        alias lt "exa --long --group --header --git --icons --tree --level $argv"
+        alias lla "exa --long --all --group --header --git --icons"
+        alias lta "exa --long --all --group --header --git --icons --tree --level $argv"
     else
-        alias ll "exa --long --all --group --header --icons"
-        alias lt "exa --long --all --group --header --icons --tree --level $argv"
+        alias ll "exa --long --group --header --icons"
+        alias lt "exa --long --group --header --icons --tree --level $argv"
+        alias lla "exa --long --all --group --header --icons"
+        alias lta "exa --long --all --group --header --icons --tree --level $argv"
     end
 end
 if type -q bat
 	alias cat "bat" # bat is the smarter cat with syntax highlighting
 end
+alias cl "clear"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init fish' !!
 status is-interactive && eval /home/enemy/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
+
+# Setting completion for Kitty terminal
+if type -q kitty
+    kitty + complete setup fish | source
+end
