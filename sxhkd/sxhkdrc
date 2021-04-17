@@ -9,6 +9,9 @@ super + Return
 # start rofi
 super + d
 	rofi -show drun -modi drun -lines 3 -eh 2 -ew 0 -width 100 -padding 400 -theme ~/.config/polybar/colorblocks/scripts/rofi/launcher.rasi
+# quick translate 
+ctrl + q
+    sh ~/Application/quick_translate/quick_trans.sh
 
 # reoload its configuration files
 super + Escape
@@ -39,10 +42,10 @@ super + g
 # MONITOR
 #
 # Switch between focused monitor and non-focus monitor
-alt + Tab
+super + Tab
 	sh ~/.config/sxhkd/switchmonitor.sh
 # Focus selected monitor.
-ctrl + alt + {h, j, k, l} 
+ctrl + super + {h, j, k, l} 
 	bspc monitor -f {west,south,north,east} --follow
 # Move focus desktop(all nodes) to selected monitor
 ctrl + shift + {h, j, k, l} 
@@ -87,7 +90,7 @@ super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
-super + {grave,Tab}
+alt + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
@@ -104,15 +107,15 @@ super + {_,shift + }{1-9,0}
 # PRESELECT
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
+alt + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-super + ctrl + {1-9}
+alt + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-super + ctrl + space
+alt + ctrl + space
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
