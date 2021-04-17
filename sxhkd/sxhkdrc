@@ -1,6 +1,6 @@
 # start terminal
 super + Return
-	alacritty
+	kitty
 
 # Lock screen
 # ctrl + alt + l
