@@ -1,145 +1,127 @@
-# start terminal
-super + Return
-	kitty
+# desktop == all nodes, monitor = all desktops
 
-# Lock screen
-# ctrl + alt + l
-# 	sh ~/Scripts/lock.sh
-
-# start rofi
-super + d
-	rofi -show drun -modi drun -lines 3 -eh 2 -ew 0 -width 100 -padding 400 -theme ~/.config/polybar/colorblocks/scripts/rofi/launcher.rasi
-# quick translate 
-ctrl + q
-    sh ~/Application/quick_translate/quick_trans.sh
-
-# reoload its configuration files
-super + Escape
-	pkill -USR1 -x sxhkd
-
-# --- bspwm hotkeys ---
-
-# quit/restart bspwm
+# Category: Bspwm[COMMON];
+#
+# Description: Quit/Restart Bspwm;
 super + shift + {q,r}
 	bspc {quit,wm -r}
-
-# close and kill
+# Description: Close and Kill;
 super + q
 	bspc node -c
-
-# alternate between the tiled and monocle layout
+# Description: Alternate Between The Tiled and Monocle Layout;
 super + m
 	bspc desktop -l next
-
-# send the newest marked node to the newest preselected node
+# Description: Send The Newest Marked Node to The Newest Preselected Node;
 super + y
 	bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest node
+# Description: Swap The Current Node and The Biggest Node;
 super + g
 	bspc node -s biggest
 
-# MONITOR
+# Category: Bspwm[MONITOR];
 #
-# Switch between focused monitor and non-focus monitor
+# Description: Switch Between Focused Monitor and Non-Focus Monitor;
 super + Tab
 	sh ~/.config/sxhkd/switchmonitor.sh
-# Focus selected monitor.
+# Description: Focus Selected Monitor;
 ctrl + super + {h, j, k, l} 
 	bspc monitor -f {west,south,north,east} --follow
-# Move focus desktop(all nodes) to selected monitor
+# Description: Move Focus Desktop to Selected Monitor;
 ctrl + shift + {h, j, k, l} 
 	bspc desktop -m {west,south,north,east} --follow
-# Move focus node to selected monitor.
+# Description: Move Focus Node to Selected Monitor;
 super + ctrl + shift + {h, j, k, l} 
 	bspc node -m {west,south,north,east} --follow
-# Swap focused desktop to desktop that is lied on 2nd monitor
+# Description: Swap Focused Desktop to Desktop That is Lied on 2nd Monitor;
 alt + {6, 7, 8, 9}
 	bspc desktop -s {6, 7, 8, 9}
-# Swap focused desktop to desktop that is lied on 3rd monitor
+# Description: Swap Focused Desktop to Desktop That is Lied on 3rd Monitor;
 alt + {1, 2, 3, 4, 5}
 	bspc desktop -s {1, 2, 3, 4, 5}
 
-# STATE/FLAGS
+# Category: Bspwm[STATE/FLAGS];
 #
-# set the window state
+# Description: Set The Window State;
 super + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
-
-# set the node flags
+# Description: Set The Node Flags;
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
-
-# FOCUS/SWAP
+# Category: Bspwm[FOCUS/SWAP];
 #
-# focus/swap the node in the given direction
+# Description: Focus/Swap The Node in The Given Direction;
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
+# Description: Focus The Node For The Given Path Jump;
 super + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
-
-# focus the next/previous node in the current desktop
+# Description: Focus The Next/Previous Node in The Current Desktop;
 super + {_,shift + }n
 	bspc node -f {next,prev}.local
-
-# focus the next/previous desktop in the current monitor
+# Description: Focus The Next/Previous Desktop in The Current Monitor;
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
-# focus the last node/desktop
+# Description: Focus The Last Node/Desktop;
 alt + {grave,Tab}
 	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
+# Description: Focus The Older or Newer Node in The Focus History;
 super + {o,i}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
-
-# focus or send to the given desktop
+# Description: Focus or Send to The Given Desktop;
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} focused:'^{1-9,10}'
 
 
-# PRESELECT
-
-# preselect the direction
+# Category: Bspwm[PRESELECT];
+#
+# Description: Preselect The Direction;
 alt + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
-
-# preselect the ratio
+# Description: Preselect The Ratio;
 alt + ctrl + {1-9}
 	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
+# Description: Cancel The Preselection For The Focused Node;
 alt + ctrl + space
 	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
+# Description: Cancel The Preselection For The Focused Desktop;
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 
-# MOVE/RESIZE
+# Category: Bspwm[MOVE/RESIZE];
 #
-# expand a window by moving one of its side outward
+# Description: Expand a Window by Moving One of Its Side Outward;
 ctrl + alt + {Left,Down,Up,Right}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
+# Description: Contract a Window by Moving One of Its Side Inward;
 ctrl + alt + shift + {Left,Down,Up,Right}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
-# move a floating window
+# Description: Move a Floating Window;
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 
-# APPLICATION KEYBINDINGS (Super + Alt + Key)
-
-# Starting screen capture
+# Category: Application Keybindings;
+#
+# Description: Start Terminal;
+super + Return
+	kitty
+# Description: Start Rofi;
+super + d
+	rofi -show drun -modi drun -lines 3 -eh 2 -ew 0 -width 100 -padding 400 -theme ~/.config/polybar/colorblocks/scripts/rofi/launcher.rasi
+# Description: Quick Translate ;
+ctrl + q
+    sh ~/Application/quick_translate/quick_trans.sh
+# Description: Reload Sxhkd Configuration File;
+super + Escape
+	pkill -USR1 -x sxhkd
+# Description: Starting Screen Capture;
 super + shift + s
 	flameshot gui
+# Description: Open This Nice CheatSheet;
+super + F1
+    sh ~/Application/sxhkdcheat.sh
