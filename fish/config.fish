@@ -8,6 +8,12 @@ export VISUAL='/usr/bin/nvim'
 # Set Alacritty as default term
 export TERM=kitty
 export BAT_THEME='Coldark-Dark'
+# Set Configuration for nnn
+set --export NNN_FIFO "/tmp/nnn.fifo"
+export NNN_PLUG="z:autojump;c:fzcd;f:fzopen;t:preview-tui-ext;u:getplugs;m:-mediainf;s:suedit;w:wall;g:gpg;k:pskill;d:dragdrop;p:rsynccp;b:nbak"
+export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
+export TERMINAL=kitty
+export GUI=1
 
 set -xg PYTHONDONTWRITEBYTECODE 1
 
@@ -73,6 +79,9 @@ if type -q bat
 	alias cat "bat" # bat is the smarter cat with syntax highlighting
 end
 alias cl "clear"
+if type -q zoxide
+    zoxide init fish | source
+end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init fish' !!
@@ -83,3 +92,4 @@ status is-interactive && eval /home/enemy/anaconda3/bin/conda "shell.fish" "hook
 if type -q kitty
     kitty + complete setup fish | source
 end
+alias nnn 'nnn -x -c -P t'
