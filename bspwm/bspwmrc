@@ -37,10 +37,10 @@ bspc config split_ratio 0.61803
 
 #bspc rule -a Gimp desktop='^8' state=floating follow=on
 #bspc rule -a Chromium desktop='^2'
-#bspc rule -a Firefox desktop='^2'
-#bspc rule -a mplayer2 state=floating
 #bspc rule -a Kupfer.py focus=on
 #bspc rule -a Screenkey manage=off
+# bspc rule -a Firefox desktop='^6'
+bspc rule -a mpc-qt state=floating
 
 export $(dbus-launch)
 bspc rule -r "*"
@@ -59,9 +59,6 @@ sh ~/.config/polybar/colorblocks/scripts/pywal.sh ~/Pictures/Wallpapers &
 sh ~/.config/polybar/launch.sh --colorblocks &
 picom --experimental-backends --config ~/.config/picom/picom.conf &
 ~/.config/bspwm/cleanfullscreen &
-#alacritty -e fish -c 'neofetch --w3m ~/Pictures/Wallpapers/19.png --loop --crop_mode fit && fist'
-#killall -q compton &
-#compton --backend glx --config ~/.config/compton.conf &
 
 # Show pointer outside terminal
 xsetroot -cursor_name left_ptr &
