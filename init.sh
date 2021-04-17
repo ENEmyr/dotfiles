@@ -106,7 +106,7 @@ read answer
 
 echo 'Installing packages'
 # maybe need to add more in order to build a picom with mesa
-sudo pacman -S base-devel pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-oprenjdk jq neofetch vim nodejs npm luarocks meson nvidia-dkms nvidia-settings python-sphinx ranger rofi alsa tree-sitter ueberzug unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat --needed --noconfirm
+sudo pacman -S base-devel pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-oprenjdk jq neofetch vim nodejs npm luarocks meson nvidia-dkms nvidia-settings python-sphinx ranger rofi alsa tree-sitter ueberzug unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat kitty --needed --noconfirm
 configgit
 
 echo 'Installing Paru for managing AUR packages'
@@ -120,6 +120,7 @@ cp -rf $dotpath'/bspwm' $HOME'/.config'
 cp -rf $dotpath'/ranger' $HOME'/.config'
 cp -rf $dotpath'/alacritty' $HOME'/.config'
 cp -rf $dotpath'/sxhkd' $HOME'/.config'
+cp -rf $dotpath'/kitty' $HOME'/.config'
 cp -rf $dotpath'/.moc' $HOME
 cp $dotpath/.tmux.conf $HOME
 cp $dotpath/.rtorrent.rc $HOME
