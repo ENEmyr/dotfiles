@@ -92,4 +92,4 @@ status is-interactive && eval /home/enemy/anaconda3/bin/conda "shell.fish" "hook
 if type -q kitty
     kitty + complete setup fish | source
 end
-alias nnn 'nnn -x -c -P t'
+alias n 'nnn -x -c -P t'
