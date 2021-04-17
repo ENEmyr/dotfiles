@@ -114,7 +114,7 @@ git clone https://aur.archlinux.org/paru.git
 cd paru && sudo makepkg -si
 cd .. && sudo rm -rf paru
 echo 'Installing packages from AUR'
-paru -S alacritty audacity discord spotify obs-studio flameshot nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git spotifyd spotifyd-runit spotify-dev spotify-tui drive-git --needed --noconfirm
+paru -S alacritty audacity discord spotify obs-studio flameshot nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git spotifyd spotifyd-runit spotify-dev spotify-tui drive-git i3lock-color translate-shell --needed --noconfirm
 
 cp -rf $dotpath'/bspwm' $HOME'/.config'
 cp -rf $dotpath'/ranger' $HOME'/.config'
@@ -123,6 +123,7 @@ cp -rf $dotpath'/sxhkd' $HOME'/.config'
 cp -rf $dotpath'/.moc' $HOME
 cp $dotpath/.tmux.conf $HOME
 cp $dotpath/.rtorrent.rc $HOME
+cp $dotpath/.xinitrc $HOME
 sh $dotpath'/fonts/install.sh'
 echo -n "Would you like to swap CapsLock key with Grave(~,\`) key (y/n)? "
 read answer
