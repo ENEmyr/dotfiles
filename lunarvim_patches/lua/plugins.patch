@@ -1,0 +1,33 @@
+diff --git a/lua/plugins.lua b/lua/plugins.lua
+index da33339..ebda6bc 100644
+--- a/lua/plugins.lua
++++ b/lua/plugins.lua
+@@ -102,5 +102,28 @@ return require("packer").startup(
+         require_plugin("nvim-web-devicons")
+         require_plugin("galaxyline.nvim")
+         require_plugin("barbar.nvim")
++
++		-- Own plugins
++		-- use 'roman/golden-ratio'
++		-- use 'camspiers/animate.vim'
++		-- use 'camspiers/lens.vim' -- Plugin that use for automatic resize windows like golden-ratio but the resized window ratio it's not a golden ratio
++		use 'dm1try/golden_size' -- Replace golden-ratio, to fix the problem that golden-ratio keep resize floating windows and affect to some plugin like telescope
++		use 'easymotion/vim-easymotion'
++		use 'terryma/vim-multiple-cursors'
++		use 'haya14busa/incsearch.vim'
++		use 'haya14busa/incsearch-fuzzy.vim'
++		use 'haya14busa/incsearch-easymotion.vim' -- Easy Fuzzy Search
++		use 'phaazon/hop.nvim'
++		use 'mcchrish/nnn.vim'
++		use {'neoclide/coc.nvim', branch = 'release'} -- Easy Fuzzy Search
++		require_plugin('golden_size')
++		require_plugin('vim-easymotion')
++		require_plugin('vim-multiple-cursors')
++		require_plugin('incsearch.vim')
++		require_plugin('incsearch-fuzzy.vim')
++		require_plugin('incsearch-easymotion.vim')
++		require_plugin('coc.nvim')
++		require_plugin('hop.nvim')
++		require_plugin('nnn.vim')
+     end
+ )

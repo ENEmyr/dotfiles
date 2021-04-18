@@ -15,7 +15,7 @@ installnvcode() {
     echo 'Installing NVcode'
     sudo npm install -g tree-sitter-cli pyright bash-language-server prettier
     luarocks install --server=https://luarocks.org/dev luaformatter
-    bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/nvim/master/utils/installer/install.sh)
+    bash <(curl -s https://raw.githubusercontent.com/Untesler/LunarVim/master/utils/installer/install.sh)
     # Patch my own config
     cp -rf $dotpath'/patch_nvcode/*' $HOME'/.config/nvim/'
 }
