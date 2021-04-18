@@ -41,6 +41,7 @@ require('nv-dadbod')
 require('nv-doge')
 require('nv-dependency')
 require('golden-size')
+require('nnn')
 require('vim-multiple-cursors')
 -- require('nv-lspinstall')
 
@@ -49,6 +50,7 @@ vim.cmd('source ~/.config/nvim/vimscript/nv-whichkey/init.vim')
 vim.cmd('source ~/.config/nvim/vimscript/easy-fuzzy-motion/init.vim')
 vim.cmd('source ~/.config/nvim/vimscript/easymotion/init.vim')
 vim.cmd('source ~/.config/nvim/vimscript/functions.vim')
+vim.api.nvim_command('autocmd VimEnter * :CocDisable') -- Disable Coc event to prevent annoying warning msg
 
 -- LSP
 require('lsp')
