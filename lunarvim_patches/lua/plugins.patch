@@ -1,8 +1,8 @@
 diff --git a/lua/plugins.lua b/lua/plugins.lua
-index da33339..ebda6bc 100644
+index da33339..6e8e68e 100644
 --- a/lua/plugins.lua
 +++ b/lua/plugins.lua
-@@ -102,5 +102,28 @@ return require("packer").startup(
+@@ -102,5 +102,34 @@ return require("packer").startup(
          require_plugin("nvim-web-devicons")
          require_plugin("galaxyline.nvim")
          require_plugin("barbar.nvim")
@@ -19,6 +19,10 @@ index da33339..ebda6bc 100644
 +		use 'haya14busa/incsearch-easymotion.vim' -- Easy Fuzzy Search
 +		use 'phaazon/hop.nvim'
 +		use 'mcchrish/nnn.vim'
++		-- use {'blackcauldron7/surround.nvim', config = function()
++		-- 	require "surround".setup {}
++		-- 	end}
++		use 'tpope/vim-surround'
 +		use {'neoclide/coc.nvim', branch = 'release'} -- Easy Fuzzy Search
 +		require_plugin('golden_size')
 +		require_plugin('vim-easymotion')
@@ -29,5 +33,7 @@ index da33339..ebda6bc 100644
 +		require_plugin('coc.nvim')
 +		require_plugin('hop.nvim')
 +		require_plugin('nnn.vim')
++		-- require_plugin('surround.nvim')
++		-- require_plugin('vim-surround')
      end
  )

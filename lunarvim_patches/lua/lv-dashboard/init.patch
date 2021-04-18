@@ -1,0 +1,72 @@
+diff --git a/lua/lv-dashboard/init.lua b/lua/lv-dashboard/init.lua
+index c6ed0b5..3375478 100644
+--- a/lua/lv-dashboard/init.lua
++++ b/lua/lv-dashboard/init.lua
+@@ -1,42 +1,28 @@
+--- vim.g.dashboard_custom_header = {
+---     '███╗   ██╗██╗   ██╗ ██████╗ ██████╗ ██████╗ ███████╗',
+---     '████╗  ██║██║   ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝',
+---     '██╔██╗ ██║██║   ██║██║     ██║   ██║██║  ██║█████╗',
+---     '██║╚██╗██║╚██╗ ██╔╝██║     ██║   ██║██║  ██║██╔══╝',
+---     '██║ ╚████║ ╚████╔╝ ╚██████╗╚██████╔╝██████╔╝███████╗',
+---     '╚═╝  ╚═══╝  ╚═══╝   ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝'
+--- }
+--- vim.g.dashboard_custom_header = {
+---
+--- '      _..._                                                                           ',
+--- '    .\'     `.   ██      ██    ██ ███    ██  █████  ██████  ██    ██ ██ ███    ███ ',
+--- '   :         :  ██      ██    ██ ████   ██ ██   ██ ██   ██ ██    ██ ██ ████  ████ ',
+--- '   :         :  ██      ██    ██ ██ ██  ██ ███████ ██████  ██    ██ ██ ██ ████ ██ ',
+--- '   `.       .\'  ██      ██    ██ ██  ██ ██ ██   ██ ██   ██  ██  ██  ██ ██  ██  ██ ',
+--- '     `-...-\'    ███████  ██████  ██   ████ ██   ██ ██   ██   ████   ██ ██      ██ ',
+---
+--- }
+-
+ vim.g.dashboard_custom_header = {
+-
+-'                 _..._                                                                           ',
+-'               .\'   (_`.    _                         __     ___           ',
+-'              :  .      :  | |   _   _ _ __   __ _ _ _\\ \\   / (_)_ __ ___  ',
+-'              :)    ()  :  | |  | | | | \'_ \\ / _` | \'__\\ \\ / /| | \'_ ` _ \\ ',
+-'              `.   .   .\'  | |__| |_| | | | | (_| | |   \\ V / | | | | | | |',
+-'                `-...-\'    |_____\\__,_|_| |_|\\__,_|_|    \\_/  |_|_| |_| |_|',
+-
++    '          _           _            _    _          _ ',
++    '         /\\ \\        /\\ \\     _   /\\ \\ /\\ \\    _ / /\\', 
++    '        /  \\ \\      /  \\ \\   /\\_\\/  \\ \\\\ \\ \\  /_/ / /', 
++    '       / /\\ \\ \\    / /\\ \\ \\_/ / / /\\ \\ \\\\ \\ \\ \\___\\/ ', 
++    '      / / /\\ \\_\\  / / /\\ \\___/ / / /\\ \\_/ / /  \\ \\ \\ ', 
++    '     / /_/_ \\/_/ / / /  \\/____/ /_/_ \\/_\\ \\ \\   \\_\\ \\', 
++    '    / /____/\\   / / /    / / / /____/\\   \\ \\ \\  / / /', 
++    '   / /\\____\\/  / / /    / / / /\\____\\/    \\ \\ \\/ / / ', 
++    '  / / /______ / / /    / / / / /______     \\ \\ \\/ /  ', 
++    ' / / /_______/ / /    / / / / /_______\\     \\ \\  /   ', 
++    ' \\/__________\\/_/     \\/_/\\/__________/      \\_\\/    ', 
++    '                                                         ',
++    '                       . -. . ...-                       ',
+ }
+ 
+-
+ vim.g.dashboard_default_executive = 'telescope'
+ 
+ vim.g.dashboard_custom_section = {
+-    a = {description = {'  Find File          '}, command = 'Telescope find_files'},
+-    b = {description = {'  Recently Used Files'}, command = 'Telescope oldfiles'},
+-    c = {description = {'  Load Last Session  '}, command = 'SessionLoad'},
+-    d = {description = {'  Find Word          '}, command = 'Telescope live_grep'},
+-    e = {description = {'  Settings           '}, command = ':e ~/.config/nvim/lv-settings.lua'}
++    a = {description = {'  New File           '}, command = ':DashboardNewFile'},
++    b = {description = {'  Find File          '}, command = 'Telescope find_files'},
++    c = {description = {'  Recently Used Files'}, command = 'Telescope oldfiles'},
++    d = {description = {'  Load Last Session  '}, command = 'SessionLoad'},
++    e = {description = {'  Find Word          '}, command = 'Telescope live_grep'},
++    f = {description = {'  Settings           '}, command = ':e ~/.config/nvim/lv-settings.lua'}
+     -- e = {description = {'  Marks              '}, command = 'Telescope marks'}
+ }
+ 
+@@ -52,4 +38,4 @@ vim.g.dashboard_custom_section = {
+ -- find_history = 'SPC f h',
+ 
+ -- vim.g.dashboard_session_directory = '~/.cache/nvim/session'
+-vim.g.dashboard_custom_footer = {'chrisatmachine.com'}
++vim.g.dashboard_custom_footer = {'https://aichanserv.com'}
