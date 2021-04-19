@@ -1,8 +1,8 @@
 diff --git a/init.lua b/init.lua
-index 4305895..99d2094 100644
+index 4305895..e218332 100644
 --- a/init.lua
 +++ b/init.lua
-@@ -49,3 +49,12 @@ require('lsp.tailwindcss-ls')
+@@ -49,3 +49,13 @@ require('lsp.tailwindcss-ls')
  require('lsp.ruby-ls')
  require('lsp.kotlin-ls')
  
@@ -12,6 +12,7 @@ index 4305895..99d2094 100644
 +require('nnn')
 +require('vim-multiple-cursors')
 +require('nv-hop')
++require('nvim-ts-rainbow')
 +vim.cmd('source ~/.config/nvim/vimscript/easy-fuzzy-motion/init.vim')
 +vim.cmd('source ~/.config/nvim/vimscript/easymotion/init.vim')
 +vim.api.nvim_command('autocmd VimEnter * :CocDisable') -- Disable Coc event to prevent annoying warning msg
