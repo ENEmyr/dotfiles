@@ -68,6 +68,7 @@ installanaconda() {
       source ~/.bash_profile
       # Install necessary packages
       pip install neovim-remote pynvim ueberzug sphinx meson
+      sudo pacman -S python-pywal --needed --noconfirm
     else
       # Scrape the latest Anaconda
       anaconda_url=$(wget -O - https://www.anaconda.com/distribution/ 2>/dev/null | sed -ne 's@.*\(https:\/\/repo\.anaconda\.com\/archive\/Anaconda3-.*-Linux-x86_64\.sh\)\">64-Bit (x86) Installer.*@\1@p')
@@ -110,7 +111,7 @@ fi
 
 echo 'Installing packages'
 # maybe need to add more in order to build a picom with mesa
-sudo pacman -S base-devel nvidia-dkms pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-openjdk jq neofetch vim nodejs npm luarocks meson nvidia-settings python-sphinx ranger rofi alsa tree-sitter unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat kitty rsync dragon mediainfo tree sxiv bspwm sxhkd --needed --noconfirm
+sudo pacman -S base-devel nvidia-dkms pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-openjdk jq neofetch vim nodejs npm luarocks meson nvidia-settings python-sphinx ranger rofi alsa tree-sitter unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat kitty rsync dragon mediainfo tree sxiv bspwm sxhkd trash-cli --needed --noconfirm
 configgit
 
 echo 'Installing Paru for managing AUR packages'
@@ -120,7 +121,8 @@ if ! command -v paru &> /dev/null; then
 	cd .. && sudo rm -rf paru
 fi
 echo 'Installing packages from AUR'
-paru -S alacritty audacity discord spotify obs-studio flameshot nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git spotifyd spotifyd-runit spotify-tui-bin i3lock-color translate-shell zoxide-bin nnn-nerd python-pynvim drive-git --needed
+paru -S alacritty audacity discord spotify obs-studio flameshot neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git spotifyd spotifyd-runit spotify-tui-bin i3lock-color translate-shell zoxide-bin nnn-nerd python-pynvim drive-git --needed
+[ ! -d "$HOME/.nvm" ] && cd $HOME && git clone https://github.com/nvm-sh/nvm.git .nvm
 
 cp -rf $dotpath'/bspwm' $HOME'/.config'
 cp -rf $dotpath'/ranger' $HOME'/.config'
@@ -128,6 +130,7 @@ cp -rf $dotpath'/alacritty' $HOME'/.config'
 cp -rf $dotpath'/sxhkd' $HOME'/.config'
 cp -rf $dotpath'/kitty' $HOME'/.config'
 cp -rf $dotpath'/nnn' $HOME'/.config'
+cp -rf $dotpath'/dunst' $HOME'.config'
 cp -rf $dotpath'/.moc' $HOME
 cp $dotpath/.tmux.conf $HOME
 cp $dotpath/.rtorrent.rc $HOME
@@ -161,7 +164,7 @@ read answer
 echo -n "Would you like to install Anaconda3 now (y/n)? "
 read answer
 [ "$answer" != "${answer#[Yy]}" ] && installanaconda
-[ "$answer" != "${answer#[Nn]}" ] && pip install neovim-remote pynvim ueberzug sphinx meson
+[ "$answer" != "${answer#[Nn]}" ] && pip install neovim-remote pynvim ueberzug sphinx meson && sudo pacman -S python-pywal --needed --noconfirm
 
 echo 'Installing Fish packages'
 fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
@@ -170,6 +173,7 @@ cat $dotpath/fish/fish_plugins | \
         fish -c 'fisher install '$package
     done
 cp $dotpath'/fish/config.fish' $HOME'/.config/fish'
+chsh -s `which fish`
 
 echo 'Installing Polybar-Theme'
 installpolybarthemes
