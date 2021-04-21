@@ -119,8 +119,7 @@ if ! command -v paru &> /dev/null; then
 	cd .. && sudo rm -rf paru
 fi
 echo 'Installing packages from AUR'
-# drive-git
-paru -S alacritty audacity discord spotify obs-studio flameshot nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git spotifyd spotifyd-runit spotify-tui-bin i3lock-color translate-shell zoxide-bin nnn-nerd python-pynvim --needed
+paru -S alacritty audacity discord spotify obs-studio flameshot nvm neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git spotifyd spotifyd-runit spotify-tui-bin i3lock-color translate-shell zoxide-bin nnn-nerd python-pynvim drive-git --needed
 
 cp -rf $dotpath'/bspwm' $HOME'/.config'
 cp -rf $dotpath'/ranger' $HOME'/.config'
