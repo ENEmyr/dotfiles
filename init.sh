@@ -165,7 +165,7 @@ read answer
 
 echo 'Installing Fish packages'
 fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
-cat $dotpath | \
+cat $dotpath/fish/fish_plugins | \
     while read package; do
         fish -c 'fisher install '$package
     done
