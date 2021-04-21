@@ -19,16 +19,16 @@ installenev() {
 }
 
 initsshgithub() {
-    # TODO: Fix this func (sshpath not found in ssh-add)
     echo 'Initializing SSH for Github'
     echo -n 'Enter email : '
     read email
     ssh-keygen -t ed25519 -C $email
-    eval "$(ssh-agent -s)"
     echo -n 'Enter SSH private key path : '
     read sshpath
-    ssh-add sshpath
-    xclip -selection clipboard < sshpath'.pub'
+    eval "$(ssh-agent -s)"
+    ssh-add $sshpath
+    xclip -selection clipboard < $sshpath'.pub'
+    answer='n'
     while [ "$answer" != "y" ]; do
         echo -n 'Is you already put your public key into Github (y/n)? : '
         read answer
@@ -76,6 +76,7 @@ installanaconda() {
       [ $anaconda_url ] || curl -L "https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh" > anaconda_script.sh
       sudo sh anaconda_script.sh
       rm anaconda_script.sh
+      [ -d "$HOME/anaconda3/condabin" ] && $HOME/anaconda3/condabin/conda init
     fi
 }
 
@@ -109,7 +110,7 @@ fi
 
 echo 'Installing packages'
 # maybe need to add more in order to build a picom with mesa
-sudo pacman -S base-devel pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-openjdk jq neofetch vim nodejs npm luarocks meson nvidia-dkms nvidia-settings python-sphinx ranger rofi alsa tree-sitter unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat kitty rsync dragon mediainfo tree sxiv --needed --noconfirm
+sudo pacman -S base-devel nvidia-dkms pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-openjdk jq neofetch vim nodejs npm luarocks meson nvidia-settings python-sphinx ranger rofi alsa tree-sitter unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat kitty rsync dragon mediainfo tree sxiv bspwm sxhkd --needed --noconfirm
 configgit
 
 echo 'Installing Paru for managing AUR packages'
@@ -175,11 +176,10 @@ installpolybarthemes
 echo 'Installing Picom'
 installpicom
 
+echo -n "Would you like to install ENEv now (y/n)? "
+read answer
+[ "$answer" != "${answer#[Yy]}" ] && installenev
 
 echo -n "Would you like to initialize ssh for github now (y/n)? "
 read answer
 [ "$answer" != "${answer#[Yy]}" ] && initsshgithub
-
-echo -n "Would you like to install ENEv now (y/n)? "
-read answer
-[ "$answer" != "${answer#[Yy]}" ] && installenev
