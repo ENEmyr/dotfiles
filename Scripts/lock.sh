@@ -42,6 +42,7 @@ V='#00bb61'  # verifying
 --greeter-font=Quark   \
 --date-font=Quark   \
 --time-font=Quark   \
+-n; xmodmap $HOME/.Xmodmap &   \
 
 # --veriftext="Drinking verification can..."
 # --wrongtext="Nope!"
