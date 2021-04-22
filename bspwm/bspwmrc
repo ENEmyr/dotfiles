@@ -52,7 +52,7 @@ killall -q polybar &
 killall cleanfullscreen
 # use for setting hotkeys
 sxhkd &
-setxkbmap -rules evdev -model pc104 -layout us,th -option grp:alt_shift_toggle &
+# setxkbmap -rules evdev -model pc104 -layout us,th -option grp:alt_shift_toggle &
 # swap grave tilde key to caplock
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap &
 sh ~/.config/polybar/colorblocks/scripts/pywal.sh ~/Pictures/Wallpapers &
