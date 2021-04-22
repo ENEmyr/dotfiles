@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+
+printf "Go To: "
+read -r path
+
+if ! [ -z "$path" ]; then
+    z $path
+fi
