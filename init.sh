@@ -134,6 +134,7 @@ cp -rf $dotpath'/nnn' $HOME'/.config'
 cp -rf $dotpath'/dunst' $HOME'.config'
 cp -rf $dotpath'/spotifyd' $HOME'/.config'
 cp -rf $dotpath'/.moc' $HOME
+cp -rf $dotpath'/Pictures' $HOME
 cp $dotpath/.tmux.conf $HOME
 cp $dotpath/.rtorrent.rc $HOME
 cp $dotpath/.xinitrc $HOME
