@@ -10,7 +10,9 @@ export TERM=kitty
 export BAT_THEME='Coldark-Dark'
 # Set Configuration for nnn
 set --export NNN_FIFO "/tmp/nnn.fifo"
-export NNN_PLUG="z:autojump;c:fzcd;f:fzopen;t:preview-tui-ext;u:getplugs;m:-mediainf;s:suedit;w:wall;g:gpg;k:pskill;d:dragdrop;p:rsynccp;b:nbak"
+export NNN_TMPFILE="/tmp/nnn"
+export NNN_TRASH=1 # need trash-cli
+export NNN_PLUG="z:autojump;c:fzcd;f:fzopen;t:preview-tui-ext;u:getplugs;m:-mediainf;s:suedit;w:wall;g:gpg;k:pskill;d:dragdrop;p:rsynccp;b:nbak;j:patchgen"
 export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
 export TERMINAL=kitty
 export GUI=1
@@ -42,7 +44,7 @@ abbr bscg "nvim ~/.config/bspwm/bspwmrc"
 abbr sxcg "nvim ~/.config/sxhkd/sxhkdrc"
 abbr kcg "nvim ~/.config/kitty/kitty.conf"
 abbr v "$EDITOR"
-abbr vi "sh ~/Application/neovide_launcher"
+abbr vi "sh ~/Scripts/neovide_launcher"
 abbr term "alacritty"
 abbr free "free -m"
 abbr cdc "cd /mnt/WindowsC"
@@ -60,6 +62,9 @@ abbr memo "nvim ~/Documents/Memo.wiki"
 abbr plbr "polybar-msg cmd restart"
 # synchronize clock with the network
 abbr clocksync "sudo ntpd -qg"
+abbr lpaccaches "ll /var/cache/pacman/pkg"
+abbr lparcaches "lta 2 ~/.cache/paru/clone"
+abbr carlendar "calcurse"
 
 # aliases
 if type -q exa # if already have exa installed (sudo pacman -S exa)
@@ -93,3 +98,4 @@ if type -q kitty
     kitty + complete setup fish | source
 end
 alias n 'nnn -x -c -P t'
+alias spt 'sh ~/Scripts/spt.sh'
