@@ -59,6 +59,7 @@ sh ~/.config/polybar/colorblocks/scripts/pywal.sh ~/Pictures/Wallpapers &
 sh ~/.config/polybar/launch.sh --colorblocks &
 picom --experimental-backends --config ~/.config/picom/picom.conf &
 ~/.config/bspwm/cleanfullscreen &
+command -v firefox_playerctl_notifier &> /dev/null && firefox_playerctl_notifier &
 
 # Show pointer outside terminal
 xsetroot -cursor_name left_ptr &
