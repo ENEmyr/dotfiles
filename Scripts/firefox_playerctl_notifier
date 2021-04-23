@@ -18,9 +18,12 @@ watch(){
     done
 }
 
-if [ "$1" = 'send' ]; then
-    send_notify
-else
-    command -v onchange &> /dev/null && onchange -d $DELAY $HOME/.mozilla/firefox/firefox-mpris/ -- sh $HOME/Scripts/firefox_playerctl_hooker.sh send
-    command -v onchange &> /dev/null || watch
-fi
+watch
+
+# if [ "$1" = 'send' ]; then
+#     send_notify
+# else
+#     watch
+#     command -v onchange &> /dev/null && onchange -d $DELAY $HOME/.mozilla/firefox/firefox-mpris/ -- firefox_playerctl_notifier send
+#     command -v onchange &> /dev/null || watch
+# fi
