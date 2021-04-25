@@ -138,6 +138,9 @@ cp -rf $dotpath'/Pictures' $HOME
 cp $dotpath/.tmux.conf $HOME
 cp $dotpath/.rtorrent.rc $HOME
 cp $dotpath/.xinitrc $HOME
+
+sudo ln -s "$HOME/Scripts/firefox_playerctl_notifier" /usr/bin/firefox_playerctl_notifier
+sudo ln -s "$HOME/Scripts/mocp_notifier" /usr/bin/mocp_notifier
 echo 'Installing fonts'
 
 paru -Sy ttf-iosevka --needed

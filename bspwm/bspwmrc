@@ -60,6 +60,7 @@ sh ~/.config/polybar/launch.sh --colorblocks &
 picom --experimental-backends --config ~/.config/picom/picom.conf &
 ~/.config/bspwm/cleanfullscreen &
 command -v firefox_playerctl_notifier &> /dev/null && firefox_playerctl_notifier &
+command -v mocp_notifier &> /dev/null && mocp_notifier &
 
 # Show pointer outside terminal
 xsetroot -cursor_name left_ptr &

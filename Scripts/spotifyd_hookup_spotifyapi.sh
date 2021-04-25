@@ -1,7 +1,7 @@
 #!/bin/sh
 
-user_id=client_id# generated on https://developer.spotify.com/dashboard/applications
-secret_id=secret
+user_id=ee584c5154e8494793434eb66750adc0 # generated on https://developer.spotify.com/dashboard/applications
+secret_id=f72426d1499244c5b6dadc572fa7c9bc
 
 myToken=$(curl -s -X 'POST' -u $user_id:$secret_id -d grant_type=client_credentials https://accounts.spotify.com/api/token | jq '.access_token' | cut -d\" -f2)
 RESULT=$?

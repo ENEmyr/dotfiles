@@ -1,0 +1,47 @@
+#!/bin/sh
+
+DELAY=1000
+ICON="$HOME/.tmp/mocp_status_icon.png"
+# STAT_TMP="$HOME/.tmp/mocp_status"
+
+[[ -z "$1" ]] || DELAY=$1
+[[ ! -d "$HOME/.tmp" ]] && mkdir "$HOME/.tmp"
+# [[ ! -f "$HOME/.tmp/mocp_status" ]] && touch $STAT_TMP
+# [[ ! -f "$HOME/.tmp/mocp_status" ]] || echo '' > $STAT_TMP
+
+former_stat=""
+
+while true; do
+	state=$(mocp -Q "%state")
+	[[ -z $former_stat ]] && former_stat=$(mocp -Q "%state%file")
+	wait
+	if [ "$state" = "PLAY" ] || [ "$state" = "PAUSE" ]; then
+		curr_stat=$(mocp -Q "%state%file")
+		wait
+		[[ -z $curr_stat ]] && continue
+		# former_stat=$(<$STAT_TMP)
+		format=""
+		file=$(mocp -Q "%file")
+		title=$(mocp -Q "%title")
+		artist=$(mocp -Q "%artist")
+		album=$(mocp -Q "%album")
+		wait
+		[[ -z "$title" ]] || format="${format}Title: ${title}\n"
+		[[ -z "$artist" ]] || format="${format}Artist: ${artist}\n"
+		[[ -z "$album" ]] || format="${format}Album: ${album}"
+		if [ ! "$former_stat" = "$curr_stat" ]; then
+			# echo "${former_stat}=${curr_stat}\n"
+			# echo "$curr_stat" > $STAT_TMP
+			former_stat=$curr_stat
+			ffmpeg -i "$file" $ICON -hide_banner -loglevel quiet > /dev/null 2>&1 < /dev/null # redirect stderr to stdout and then redirect to /dev/null
+			wait
+			[[ ! -f $ICON ]] && ICON="$HOME/.moc/moc_default_icon.png"
+			[[ -z $format ]] && format="Filename: $file"
+			notify-send "Mocp:$state" "$format" --icon=$ICON --urgency=low --expire-time=3000 --app-name=mocp
+			wait
+			[ ! $ICON = "$HOME/.moc/moc_default_icon.png" ] && rm $ICON
+		fi
+	fi
+	sleep $(printf %.1f "$(($DELAY))e-3")
+done
+
