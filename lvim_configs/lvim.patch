@@ -1,0 +1,208 @@
+diff --git a/lua/lvim/config/settings.lua b/lua/lvim/config/settings.lua
+index b86e1a1..7898065 100644
+--- a/lua/lvim/config/settings.lua
++++ b/lua/lvim/config/settings.lua
+@@ -37,7 +37,7 @@ M.load_options = function()
+     tabstop = 2, -- insert 2 spaces for a tab
+     cursorline = true, -- highlight the current line
+     number = true, -- set numbered lines
+-    relativenumber = false, -- set relative numbered lines
++    relativenumber = true, -- set relative numbered lines
+     numberwidth = 4, -- set number column width to 2 {default 4}
+     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
+     wrap = false, -- display lines as one long line
+diff --git a/lua/lvim/core/nvimtree.lua b/lua/lvim/core/nvimtree.lua
+index d9e6fb5..17f5985 100644
+--- a/lua/lvim/core/nvimtree.lua
++++ b/lua/lvim/core/nvimtree.lua
+@@ -37,9 +37,9 @@ function M.config()
+       folder_arrows = 1,
+       tree_width = 30,
+     },
+-    ignore = { ".git", "node_modules", ".cache" },
++    ignore = { ".git", "node_modules", ".cache", "__pycache__" },
+     quit_on_open = 0,
+-    hide_dotfiles = 1,
++    hide_dotfiles = 0,
+     git_hl = 1,
+     root_folder_modifier = ":t",
+     allow_resize = 1,
+diff --git a/lua/lvim/core/treesitter.lua b/lua/lvim/core/treesitter.lua
+index ce99deb..113bf96 100644
+--- a/lua/lvim/core/treesitter.lua
++++ b/lua/lvim/core/treesitter.lua
+@@ -21,7 +21,7 @@ M.config = function()
+     },
+     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
+     -- TODO seems to be broken
+-    indent = { enable = true, disable = { "yaml" } },
++    indent = { enable = true, disable = { "yaml", "python" } },
+     autotag = { enable = false },
+     textobjects = {
+       swap = {
+@@ -57,9 +57,9 @@ M.config = function()
+       },
+     },
+     rainbow = {
+-      enable = false,
++      enable = true,
+       extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+-      max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
++      max_file_lines = 2000, -- Do not enable for files with more than 1000 lines, int
+     },
+   }
+ end
+diff --git a/lua/lvim/core/which-key.lua b/lua/lvim/core/which-key.lua
+index fcaeacf..dc86c70 100644
+--- a/lua/lvim/core/which-key.lua
++++ b/lua/lvim/core/which-key.lua
+@@ -64,7 +64,8 @@ M.config = function()
+       ["/"] = { "<ESC><CMD>lua ___comment_gc(vim.fn.visualmode())<CR>", "Comment" },
+     },
+     mappings = {
+-      ["w"] = { "<cmd>w!<CR>", "Save" },
++      -- ["w"] = { "<cmd>w!<CR>", "Save" },
++      ["w"] = { "<cmd>HopWord<CR>", "Hop Word" },
+       ["q"] = { "<cmd>q!<CR>", "Quit" },
+       ["/"] = { "<cmd>lua require('Comment').toggle()<CR>", "Comment" },
+       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
+diff --git a/lua/lvim/plugins.lua b/lua/lvim/plugins.lua
+index 616b2fa..901016c 100644
+--- a/lua/lvim/plugins.lua
++++ b/lua/lvim/plugins.lua
+@@ -132,7 +132,7 @@ return {
+   -- Status Line and Bufferline
+   {
+     -- "hoob3rt/lualine.nvim",
+-    "shadmansaleh/lualine.nvim",
++    "nvim-lualine/lualine.nvim",
+     -- "Lunarvim/lualine.nvim",
+     config = function()
+       require("lvim.core.lualine").setup()
+@@ -186,4 +186,126 @@ return {
+     end,
+     disable = not lvim.builtin.terminal.active,
+   },
++
++  -- Own added plugins
++  {
++    "phaazon/hop.nvim",
++    event = "BufRead",
++    config = function()
++      require("hop").setup()
++      vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
++      -- vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
++    end,
++  },
++  {
++    'wfxr/minimap.vim',
++    run = "cargo install --locked code-minimap", -- Minimap
++    cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
++    config = function ()
++      vim.cmd ("let g:minimap_width = 10")
++      vim.cmd ("let g:minimap_auto_start = 1")
++      vim.cmd ("let g:minimap_auto_start_win_enter = 1")
++    end,
++  },
++  {
++    "p00f/nvim-ts-rainbow", -- Rainbow parentheses
++      config = function()
++        require("nvim-treesitter.configs").setup({
++          rainbow={
++            enable=true,
++            extended_mode=true
++            }
++        })
++    end,
++  },
++  {
++    "norcalli/nvim-colorizer.lua", -- Display colors code as colors
++      config = function()
++        require("colorizer").setup({ "*" }, {
++            RGB = true, -- #RGB hex codes
++            RRGGBB = true, -- #RRGGBB hex codes
++            RRGGBBAA = true, -- #RRGGBBAA hex codes
++            rgb_fn = true, -- CSS rgb() and rgba() functions
++            hsl_fn = true, -- CSS hsl() and hsla() functions
++            css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
++            css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
++            })
++    end,
++  },
++  {
++    "ray-x/lsp_signature.nvim", -- Hint when typing
++    event = "BufRead",
++    config = function()
++      require "lsp_signature".setup()
++    end
++  },
++  {
++    "simrat39/symbols-outline.nvim", -- Show code structure as tree
++    cmd = "SymbolsOutline",
++  },
++  {
++    "lukas-reineke/indent-blankline.nvim", -- Hint indent line
++    event = "BufRead",
++    setup = function()
++      vim.g.indentLine_enabled = 1
++      vim.g.indent_blankline_char = "▏"
++      vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
++      vim.g.indent_blankline_buftype_exclude = {"terminal"}
++      vim.g.indent_blankline_show_trailing_blankline_indent = false
++      vim.g.indent_blankline_show_first_indent_level = false
++      vim.g.show_current_context = true
++    end
++  },
++  {
++    "karb94/neoscroll.nvim", -- Smooth scrolling
++    event = "WinScrolled",
++    config = function()
++      require('neoscroll').setup({
++        -- All these keys will be mapped to their corresponding default scrolling animation
++        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
++        '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
++        hide_cursor = true,          -- Hide cursor while scrolling
++        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
++        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
++        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
++        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
++        easing_function = nil,        -- Default easing function
++        pre_hook = nil,              -- Function to run before the scrolling animation starts
++        post_hook = nil,              -- Function to run after the scrolling animation ends
++      })
++    end
++  },
++  {
++    "felipec/vim-sanegx", -- Open url with gx
++    event = "BufRead",
++  },
++  {
++    "tpope/vim-surround", -- Vim surround
++    keys = {"c", "d", "y"}
++  },
++  {
++    "dm1try/golden_size", -- golden ratio
++    config = function()
++      local function ignore_by_buftype(types)
++        local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
++        for _, type in pairs(types) do
++          if type == buftype then
++            return 1
++          end
++        end
++      end
++
++      local golden_size = require("golden_size")
++      -- set the callbacks, preserve the defaults
++      golden_size.set_ignore_callbacks({
++        { ignore_by_buftype, {'terminal','quickfix', 'nerdtree', 'nofile', 'minimap'} }, -- nofile is the filetype of NvimTree
++        { golden_size.ignore_float_windows }, -- default one, ignore float windows
++        { golden_size.ignore_by_window_flag }, -- default one, ignore windows with w:ignore_gold_size=1
++      })
++    end
++  },
++  {
++    'mg979/vim-visual-multi',
++    branch = "master",
++  }
+ }
