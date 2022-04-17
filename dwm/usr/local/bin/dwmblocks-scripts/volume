@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo "^c#61afef^ 墳 ^c#61afef^ $(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))"

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# feh --no-fehbg --bg-scale "$HOME/.dwm/wallpaper.jpg"
+feh --bg-fill $HOME/Pictures/Wallpapers/laplus_bg_2.png &

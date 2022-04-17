@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+echo "^c#ff8ebe^^b#ff61a3^^c#f0e7eb^  ^c#f0e7eb^^b#ff61a3^$(xkblayout-state print '%s') "

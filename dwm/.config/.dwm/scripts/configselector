@@ -1,0 +1,25 @@
+#!/bin/bash
+
+TEXTEDIT="kitty -e lvim"
+declare -a options=(
+"AutoStart Script - $HOME/.config/enemy-dwm/scripts/autostart.sh"
+"DWM scripts - $HOME/.config/enemy-dwm/scripts/"
+"Config selector - $HOME/.config/enemy-dwm/scripts/configselector"
+"NeoVim Config - $HOME/.config/nvim/init.vim"
+"NeoVim Snippets - $HOME/.config/nvim/UltiSnips"
+"Picom config - $HOME/.config/enemy-dwm/picom.conf"
+"SXHKD keybinds - $HOME/.config/enemy-dwm/sxhkdrc"
+"Xinitrc - $HOME/.xinitrc"
+"Zsh aliases - $HOME/.zshrc-personal"
+"Zshrc - $HOME/.zshrc"
+)
+
+choice=$(printf '%s\n' "${options[@]}"| dmenu -i -h 30 -p 'Edit config:')
+if [[ "$choice" == "quit" ]]; then
+	echo "Program terminated." && exit 1
+elif [ "$choice" ]; then
+	cfg=$(printf '%s\n' "${choice}" | awk '{print $NF}')
+	$TEXTEDIT $cfg
+else 
+	echo "Program terminated." && exit 1
+fi

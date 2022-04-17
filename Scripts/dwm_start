@@ -1,0 +1,4 @@
+#/usr/bin/sh
+
+#while type dwm >/dev/null ; do dwm 2> ~/.dwm.log && continue || break ; done
+dwm 2> ~/.dwm.log
