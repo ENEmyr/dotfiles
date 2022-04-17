@@ -11,11 +11,12 @@ configgit() {
     git config --global user.email nosde@protonmail.com
 }
 
-installenev() {
-    echo 'Installing ENEv'
+installlvim() {
+    echo 'Installing Lvim'
     sudo npm install -g tree-sitter-cli pyright bash-language-server prettier --force
     sudo luarocks install --server=https://luarocks.org/dev luaformatter
-    bash <(curl -s https://raw.githubusercontent.com/Untesler/LunarVim/master/utils/installer/install.sh)
+    bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+    cp $dotpath'/lvim/config.lua' $HOME'/.config/lvim'
 }
 
 initsshgithub() {
@@ -35,49 +36,33 @@ initsshgithub() {
     done
 }
 
-installpicom() {
-    git clone https://github.com/ibhagwan/picom.git
-    cd picom
-    git submodule update --init --recursive
-    meson --buildtype=release . build
-    ninja -C build
-    sudo ninja -C build install
-    cd .. && rm -rf picom
-    cp -rf $dotpath'/picom' $HOME'/.config'
-}
-
-installpolybarthemes() {
-    git clone --depth=1 https://github.com/adi1090x/polybar-themes.git
-    cd polybar-themes
-    sudo chmod +x setup.sh
-    sh setup.sh
-    cd ..
-    rm -rf polybar-themes
-    cp $dotpath'/polybar/launch.sh' $HOME'/.config/polybar'
-    cp -rf $dotpath'/polybar/custom_modules' $HOME'/.config/polybar'
-    cp -rf $dotpath'/polybar/colorblocks' $HOME'/.config/polybar'
-}
-
-installanaconda() {
+installminiconda3() {
     # TODO: Seperate this func into another script because need to restart the terminal to take affect after installing conda
     echo 'Installing Anaconda3'
     if [ -x "$(command -v conda)" ]; then
-      echo 'Anaconda is already installed!'
-      sudo conda update --yes conda
-      sudo conda update --yes anaconda
-      source ~/.bash_profile
+      echo 'Miniconda3 is already installed!'
+      sudo conda update -n base -c defaults conda --yes
       # Install necessary packages
       pip install neovim-remote pynvim ueberzug sphinx meson
       sudo pacman -S python-pywal --needed --noconfirm
     else
-      # Scrape the latest Anaconda
-      anaconda_url=$(wget -O - https://www.anaconda.com/distribution/ 2>/dev/null | sed -ne 's@.*\(https:\/\/repo\.anaconda\.com\/archive\/Anaconda3-.*-Linux-x86_64\.sh\)\">64-Bit (x86) Installer.*@\1@p')
-      [ $anaconda_url ] && curl -L $anaconda_url > anaconda_script.sh
-      # If the url format is out of date just use static link instead.
-      [ $anaconda_url ] || curl -L "https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh" > anaconda_script.sh
-      sudo sh anaconda_script.sh
-      rm anaconda_script.sh
-      [ -d "$HOME/anaconda3/condabin" ] && $HOME/anaconda3/condabin/conda init
+      paru -S miniconda3 --needed --noconfirm
+      [ -d "/opt/miniconda3/bin" ] && /opt/miniconda3/bin/conda init
+    fi
+}
+
+installmariadb() {
+    # TODO: Seperate this func into another script because need to restart the terminal to take affect after installing conda
+    echo 'Installing MariaDB'
+    if [ -x "$(command -v mysql)" ]; then
+      echo 'MariaDB is already installed!'
+    else
+      paru -S mariadb --needed --noconfirm
+      # disable copy-on-write for btfs file system
+      sudo chattr +C /var/lib/mysql/
+      sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+      systemctl enable --now mariadb
+      sudo mysql_secure_installation
     fi
 }
 
@@ -86,7 +71,7 @@ echo 'Initializing System'
 
 answer='n'
 while [ "$answer" == "n" ]; do
-    echo -n 'Please enter path to dotfiles/ (like: /home/enemy/Repos/dotfiles) : '
+    echo -n 'Please enter path to dotfiles/ (like: /home/enemy/Repositories/dotfiles) : '
     read dotpath
     echo 'Are your sure "'$dotpath'" is the path you want (y/n)? '
     read answer
@@ -99,19 +84,13 @@ done
 [ ! -d "$HOME/Pictures/Wallpapers" ] && mkdir -p $HOME'/Pictures/Wallpapers'
 [ ! -d "$HOME/Pictures/Avatars" ] && mkdir -p $HOME'/Pictures/Avatars'
 [ ! -d "$HOME/Application" ] && mkdir $HOME'/Application'
-[ ! -d "$HOME/Repos" ] && mkdir $HOME'/Repos'
+[ ! -d "$HOME/Repositories" ] && mkdir $HOME'/Repositories'
 
 sudo pacman -Syu
-# rsm is for runit service manager
-if ! command -v rsm &> /dev/null; then
-	echo -n "Would you like to install rsm(runit services manager) now (y/n)? "
-	read answer
-	[ "$answer" != "${answer#[Yy]}" ] && sudo pacman -S rsm --needed --noconfirm
-fi
 
 echo 'Installing packages'
 # maybe need to add more in order to build a picom with mesa
-sudo pacman -S base-devel nvidia-dkms pkg-config boost git feh xautolock catdoc pandoc cmake wget fish fzf go rust lua jre-openjdk jdk-openjdk jq neofetch vim nodejs npm luarocks meson nvidia-settings python-sphinx ranger rofi alsa tree-sitter unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat kitty rsync dragon mediainfo tree sxiv bspwm sxhkd trash-cli playerctl calcurse --needed --noconfirm
+sudo pacman -S base-devel nvidia-dkms pkg-config boost git feh catdoc pandoc glibc cmake wget fish fzf go rust lua jre-openjdk jdk-openjdk jq neofetch vim nodejs npm luarocks meson nvidia-settings python-sphinx ranger rofi alsa tree-sitter unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat kitty rsync dragon mediainfo tree sxiv sxhkd trash-cli playerctl calcurse ncdu xfce-polkit --needed --noconfirm
 configgit
 
 echo 'Installing Paru for managing AUR packages'
@@ -122,13 +101,11 @@ if ! command -v paru &> /dev/null; then
 fi
 echo 'Installing packages from AUR'
 # comment out: spotify, spotifyd-runit
-paru -S alacritty audacity discord obs-studio flameshot neovim-nightly-git moc-pulse-svn python-ueberzug-git polybar-git lazygit gnome-disk-utility microsoft-edge-dev-bin mpc-qt-git neovide-git spotifyd spotify-tui-bin i3lock-color translate-shell zoxide-bin nnn-nerd python-pynvim drive-git --needed
+paru -S alacritty audacity discord obs-studio flameshot neovim python-ueberzug-git lazygit gnome-disk-utility microsoft-edge-dev-bin  neovide spotifyd spotify-tui-bin translate-shell zoxide-bin nnn-nerd python-pynvim drive-git tty-clock alsi gotop-bin nvtop volumeicon imagemagick xdotool --needed
 [ ! -d "$HOME/.nvm" ] && cd $HOME && git clone https://github.com/nvm-sh/nvm.git .nvm
 
-cp -rf $dotpath'/bspwm' $HOME'/.config'
 cp -rf $dotpath'/ranger' $HOME'/.config'
 cp -rf $dotpath'/alacritty' $HOME'/.config'
-cp -rf $dotpath'/sxhkd' $HOME'/.config'
 cp -rf $dotpath'/kitty' $HOME'/.config'
 cp -rf $dotpath'/nnn' $HOME'/.config'
 cp -rf $dotpath'/dunst' $HOME'.config'
@@ -137,7 +114,6 @@ cp -rf $dotpath'/.moc' $HOME
 cp -rf $dotpath'/Pictures' $HOME
 cp $dotpath/.tmux.conf $HOME
 cp $dotpath/.rtorrent.rc $HOME
-cp $dotpath/.xinitrc $HOME
 
 sudo ln -s "$HOME/Scripts/firefox_playerctl_notifier" /usr/bin/firefox_playerctl_notifier
 sudo ln -s "$HOME/Scripts/mocp_notifier" /usr/bin/mocp_notifier
@@ -163,14 +139,15 @@ sudo fc-cache
 echo -n "Would you like to swap CapsLock key with Grave(~,\`) key (y/n)? "
 read answer
 [ "$answer" != "${answer#[Yy]}" ] && cp $dotpath'/.Xmodmap' $HOME
-echo -n "Would you like to make system x configuration file is usable by nvidia x driver (y/n)? "
-read answer
-[ "$answer" != "${answer#[Yy]}" ] && sudo nvidia-xconfig
 
-echo -n "Would you like to install Anaconda3 now (y/n)? "
+echo -n "Would you like to install Miniconda3 now (y/n)? "
 read answer
-[ "$answer" != "${answer#[Yy]}" ] && installanaconda
+[ "$answer" != "${answer#[Yy]}" ] && installminiconda3
 [ "$answer" != "${answer#[Nn]}" ] && pip install neovim-remote pynvim ueberzug sphinx meson && sudo pacman -S python-pywal --needed --noconfirm
+
+echo -n "Would you like to install MariaDB (y/n)? "
+read answer
+[ "$answer" != "${answer#[Yy]}" ] && installmariadb
 
 echo 'Installing Fish packages'
 fish -c 'curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher'
@@ -181,14 +158,9 @@ cat $dotpath/fish/fish_plugins | \
 cp $dotpath'/fish/config.fish' $HOME'/.config/fish'
 chsh -s `which fish`
 
-echo 'Installing Polybar-Theme'
-installpolybarthemes
-echo 'Installing Picom'
-installpicom
-
 echo -n "Would you like to install ENEv now (y/n)? "
 read answer
-[ "$answer" != "${answer#[Yy]}" ] && installenev
+[ "$answer" != "${answer#[Yy]}" ] && installlvim
 
 echo -n "Would you like to initialize ssh for github now (y/n)? "
 read answer
