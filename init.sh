@@ -110,6 +110,7 @@ cp -rf $dotpath'/kitty' $HOME'/.config'
 cp -rf $dotpath'/nnn' $HOME'/.config'
 cp -rf $dotpath'/dunst' $HOME'.config'
 cp -rf $dotpath'/spotifyd' $HOME'/.config'
+cp -rf $dotpath'/keepmenu/.config/keepmenu' $HOME'/.config'
 cp -rf $dotpath'/.moc' $HOME
 cp -rf $dotpath'/Pictures' $HOME
 cp $dotpath/.tmux.conf $HOME
@@ -117,6 +118,7 @@ cp $dotpath/.rtorrent.rc $HOME
 
 sudo ln -s "$HOME/Scripts/firefox_playerctl_notifier" /usr/bin/firefox_playerctl_notifier
 sudo ln -s "$HOME/Scripts/mocp_notifier" /usr/bin/mocp_notifier
+sudo ln -s "$HOME/Scripts/dmenu-translate" /usr/bin/dmenu-translate
 echo 'Installing fonts'
 
 paru -Sy ttf-iosevka --needed
@@ -143,7 +145,7 @@ read answer
 echo -n "Would you like to install Miniconda3 now (y/n)? "
 read answer
 [ "$answer" != "${answer#[Yy]}" ] && installminiconda3
-[ "$answer" != "${answer#[Nn]}" ] && pip install neovim-remote pynvim ueberzug sphinx meson && sudo pacman -S python-pywal --needed --noconfirm
+[ "$answer" != "${answer#[Nn]}" ] && pip install neovim-remote pynvim ueberzug sphinx meson keepmenu && sudo pacman -S python-pywal --needed --noconfirm
 
 echo -n "Would you like to install MariaDB (y/n)? "
 read answer
