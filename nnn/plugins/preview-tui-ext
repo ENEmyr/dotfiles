@@ -282,9 +282,26 @@ generate_preview() {
 image_preview() {
     clear
     if [ "$TERMINAL" = "kitty" ]; then
+        # Find the size of preview canvas
+        # canvash=`kitty +kitten icat --print-window-size | rg -o "(?:[^x]*$)"` # 944 on 1080p
+        # canvasw=`kitty +kitten icat --print-window-size | rg -o "^[^x]*"` # 992 on 1080p
+
+        # For vertical alignment to center
+        # imgw=`identify -format "%w" "$3"`
+        # imgh=`identify -format "%h" "$3"`
+        # [ $imgw -ge $canvasw ] && ((resizefactor=$imgw/$canvasw)) || ((resizefactor=$canvasw/$imgw))
+        # ((diff=$canvash-($imgh/$resizefactor)))
+        # ((rescale=$diff/($canvash/$2)))
+        # ((top=($rescale)/2))
         # Kitty terminal users can use the native image preview method.
-        kitty +kitten icat --silent --place "$1"x"$2"@0x0 --transfer-mode=stream --stdin=no \
-            "$3"
+        
+        # Preview image
+        # Full res
+        # kitty +kitten icat --silent --scale-up --place "$1"x"$2"@0x"$top" --transfer-mode=stream --stdin=no \
+        #     "$3"
+        # Fill mode
+        convert "$3" -gravity center -crop 944x992+0+0 jpg:- | kitty +kitten icat --silent --scale-up \
+          --place "$1"x"$2"@0x0 --transfer-mode=stream --stdin=yes # fix crop size for speed
     elif exists ueberzug; then
         ueberzug_layer "$1" "$2" "$3"
     elif exists catimg; then
