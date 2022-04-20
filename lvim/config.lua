@@ -52,6 +52,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
 --   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
 -- }
+lvim.builtin.which_key.mappings["m"] = { "<cmd>MinimapToggle<cr>", "Minimap Toggle" }
 lvim.builtin.which_key.mappings["w"] = { "<cmd>HopWord<CR>", "Hop Word" }
 lvim.builtin.which_key.mappings["b"] = {
   name = "Buffers",
