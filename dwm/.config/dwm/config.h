@@ -54,7 +54,9 @@ static const int colorfultag =
 
 static const char *colors[][3] = {
     /*               fg         bg         border   */
-    [SchemeNorm] = {white, black, gray2},
+    [TitleNorm] = {gray3, black, gray2},
+    [TitleSel] = {white, black, gray2},
+    [SchemeNorm] = {gray3, black, gray2},
     [SchemeSel] = {gray4, blue, blue},
     [TabSel] = {blue, gray2, black},
     [TabNorm] = {gray3, black, black},

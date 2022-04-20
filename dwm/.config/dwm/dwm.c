@@ -96,6 +96,8 @@ enum {
   CurLast
 }; /* cursor */
 enum {
+  TitleNorm,
+  TitleSel,
   SchemeNorm,
   SchemeSel,
   SchemeTag,
@@ -1491,6 +1493,8 @@ void drawbar(Monitor *m) {
 
   if ((w = mw + m->gappov * 2 - sw - stw - x) > bh_n) {
     if (m->sel) {
+      drw_setscheme(drw, scheme[m == selmon ? TitleSel : TitleSel]);
+      drw_text(drw, x, 0, w - 50, bh, lrpad / 2, m->sel->name, 0);
       drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
       if (m->sel->isfloating)
         drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
@@ -3206,7 +3210,8 @@ void unfocus(Client *c, int setfocus) {
   if (!c)
     return;
   grabbuttons(c, 0);
-  XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
+  // XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
+  XSetWindowBorder(dpy, c->win, 0);
   if (setfocus) {
     XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
     XDeleteProperty(dpy, root, netatom[NetActiveWindow]);

@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-echo "^c#94af7d^  $(pacman -Q | wc -l)"
+echo "^c#94af7d^  $(paru -Qu | wc -l)"

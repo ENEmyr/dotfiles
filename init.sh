@@ -19,6 +19,15 @@ installlvim() {
     cp $dotpath'/lvim/config.lua' $HOME'/.config/lvim'
 }
 
+installdwm() {
+  echo 'Installing ENEDWM'
+  cp -rf $dotpath'/dwm/.dwm/' $HOME
+  cp -rf $dotpath'/dwm/.config/dwm' $HOME'/.config/'
+  sudo ln -s $HOME'.config/dwm/dwm' /usr/bin/dwm
+  sudo ln -s $HOME'/Scripts/dwm_start' /usr/bin/dwn_start
+  [ -d "/usr/share/xsessions/" ] && sudo cp -rf $dotpath'/xsessions' /usr/share/
+}
+
 initsshgithub() {
     echo 'Initializing SSH for Github'
     echo -n 'Enter email : '
@@ -160,10 +169,14 @@ cat $dotpath/fish/fish_plugins | \
 cp $dotpath'/fish/config.fish' $HOME'/.config/fish'
 chsh -s `which fish`
 
-echo -n "Would you like to install ENEv now (y/n)? "
+echo -n "Would you like to install Lvim now (y/n)? "
 read answer
 [ "$answer" != "${answer#[Yy]}" ] && installlvim
 
 echo -n "Would you like to initialize ssh for github now (y/n)? "
 read answer
 [ "$answer" != "${answer#[Yy]}" ] && initsshgithub
+
+echo -n "Would you like to install ENEDWM now (y/n)? "
+read answer
+[ "$answer" != "${answer#[Yy]}" ] && installdwm
