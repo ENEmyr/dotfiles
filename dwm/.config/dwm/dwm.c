@@ -180,7 +180,7 @@ struct Client {
   float cfact;
   int x, y, w, h;
   int oldx, oldy, oldw, oldh;
-  int basew, baseh, incw, inch, maxw, maxh, minw, minh;
+  int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
   int bw, oldbw;
   unsigned int tags;
   int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate,
@@ -541,6 +541,8 @@ int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact) {
   if (*w < bh)
     *w = bh;
   if (resizehints || c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
+    if (!c->hintsvalid)
+      updatesizehints(c);
     /* see last two sentences in ICCCM 4.1.2.3 */
     baseismin = c->basew == c->minw && c->baseh == c->minh;
     if (!baseismin) { /* temporarily remove base dimensions */
@@ -720,6 +722,7 @@ void cleanup(void) {
     drw_cur_free(drw, cursor[i]);
   for (i = 0; i < LENGTH(colors) + 1; i++)
     free(scheme[i]);
+  free(scheme);
   XDestroyWindow(dpy, wmcheckwin);
   drw_free(drw);
   XSync(dpy, False);
@@ -1449,6 +1452,9 @@ void drawbar(Monitor *m) {
   int boxw = drw->fonts->h / 6 + 2;
   unsigned int i, occ = 0, urg = 0;
   Client *c;
+
+  if (!m->showbar)
+    return;
 
   XSetForeground(drw->dpy, drw->gc, clrborder.pixel);
   XFillRectangle(drw->dpy, drw->drawable, drw->gc, 0, 0, m->ww - m->gappov * 2,
@@ -2412,7 +2418,7 @@ void propertynotify(XEvent *e) {
         arrange(c->mon);
       break;
     case XA_WM_NORMAL_HINTS:
-      updatesizehints(c);
+      c->hintsvalid = 0;
       break;
     case XA_WM_HINTS:
       updatewmhints(c);
@@ -3498,6 +3504,7 @@ void updatesizehints(Client *c) {
   } else
     c->maxa = c->mina = 0.0;
   c->isfixed = (c->maxw && c->maxh && c->maxw == c->minw && c->maxh == c->minh);
+  c->hintsvalid = 1;
 }
 
 void updatestatus(void) {
@@ -3792,6 +3799,14 @@ void zoom(const Arg *arg) {
     if (!c || !(c = nexttiled(c->next)))
       return;
   pop(c);
+}
+
+void logging() {
+  FILE *log = NULL;
+  if (!(log = fopen("/tmp/dwm.log", "w"))) {
+  };
+  fprintf(log, "%s", "Called");
+  fclose(0);
 }
 
 int main(int argc, char *argv[]) {
