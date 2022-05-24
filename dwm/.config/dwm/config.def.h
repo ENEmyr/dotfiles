@@ -237,7 +237,6 @@ static Key keys[] = {
     {ControlMask | ShiftMask, XK_r, quit, {1}},
     {MODKEY, XK_e, hidewin, {0}},
     {MODKEY | ShiftMask, XK_e, restorewin, {0}},
-
 };
 
 /* button definitions */
