@@ -112,9 +112,7 @@ lvim.builtin.treesitter.indent = { enable = true, disable = { "yaml", "python", 
 lvim.builtin.nvimtree.setup.view = {
   width = 30,
   height = 30,
-  hide_root_folder = false,
-  side = "left",
-  auto_resize = false,
+  hide_root_folder = false, side = "left",
   mappings = {
     custom_only = false,
     list = {},
@@ -337,6 +335,19 @@ lvim.plugins = {
         line_number_text    = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
       })
     end
+  },
+  {
+    'luukvbaal/nnn.nvim',
+    branch = 'master',
+    require("nnn").setup({
+      picker = {
+        cmd = "tmux new-session nnn -x -c -P t",
+        style = { border = "rounded" },
+        session = "shared",
+      },
+      replace_netrw = "picker",
+      window_nav = "<C-l>"
+    })
   }
 }
 
