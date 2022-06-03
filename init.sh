@@ -110,7 +110,7 @@ if ! command -v paru &> /dev/null; then
 fi
 echo 'Installing packages from AUR'
 # comment out: spotify, spotifyd-runit
-paru -S alacritty audacity discord obs-studio flameshot neovim python-ueberzug-git lazygit gnome-disk-utility microsoft-edge-dev-bin  neovide spotifyd spotify-tui-bin translate-shell zoxide-bin nnn-nerd python-pynvim drive-git tty-clock alsi gotop-bin nvtop volumeicon imagemagick xdotool xkblayout-state --needed
+paru -S alacritty audacity discord obs-studio flameshot neovim python-ueberzug-git lazygit gnome-disk-utility microsoft-edge-dev-bin  neovide spotifyd spotify-tui-bin translate-shell zoxide-bin nnn-nerd python-pynvim drive-git tty-clock alsi gotop-bin nvtop volumeicon imagemagick xdotool xkblayout-state extra/moc --needed
 [ ! -d "$HOME/.nvm" ] && cd $HOME && git clone https://github.com/nvm-sh/nvm.git .nvm
 
 cp -rf $dotpath'/ranger' $HOME'/.config'

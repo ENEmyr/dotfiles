@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# Description: Concat media selected media files with ffmpeg
+#
+# Dependency: ffmpeg 
+#
+# Shell: POSIX compliant
+# Author: ENEmy
+
+fname="${1}"
+outname="concat - $(awk 'NR==1{gsub(/^[file]+/,"");print $0}' "${fname}" | sed -e 's|["'\'']||g')"
+ffmpeg -f concat -safe 0 -i "${fname}" -c copy "${outname}"
+# printf "(a)udio or (v)ideo? : "
+# read -r resp
+# if [ "$resp" = "v" ]; then
+#     ffmpeg -f concat -safe 0 -i "${fname}" -c copy "${outname}"
+# elif [ "$resp" = "a" ]; then
+#     ffmpeg -f concat -safe 0 -i "${fname}" -c copy "${outname}"
+# fi
