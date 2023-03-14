@@ -6,14 +6,14 @@ set -o nounset # error when referencing undefined variable
 set -o errexit # exit when command fails
 
 configgit() {
-    git config --global github.user untesler
+    git config --global github.user enemyr
     git config --global user.name ENEmy
-    git config --global user.email nosde@protonmail.com
+    git config --global user.email enemyr@pm.me
 }
 
 installlvim() {
     echo 'Installing Lvim'
-    sudo npm install -g tree-sitter-cli pyright bash-language-server prettier --force
+    sudo npm install -g tree-sitter-cli pyright bash-language-server prettier aicommits --force
     sudo luarocks install --server=https://luarocks.org/dev luaformatter
     bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
     cp $dotpath'/lvim/config.lua' $HOME'/.config/lvim'
@@ -99,7 +99,7 @@ sudo pacman -Syu
 
 echo 'Installing packages'
 # maybe need to add more in order to build a picom with mesa
-sudo pacman -S base-devel nvidia-dkms pkg-config boost git feh catdoc pandoc glibc cmake wget fish fzf go rust lua jre-openjdk jdk-openjdk jq neofetch vim nodejs npm luarocks meson nvidia-settings python-sphinx ranger rofi alsa tree-sitter unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox libev xcb-util libxcb libconfig dbus dunst keepassxc ufw rtorrent exa bat kitty rsync dragon mediainfo tree sxiv sxhkd trash-cli playerctl calcurse ncdu xfce-polkit --needed --noconfirm
+sudo pacman -S base-devel nvidia-dkms pkg-config boost git feh catdoc pandoc glibc cmake wget fish fzf go rust lua jre-openjdk jdk-openjdk jq neofetch vim nodejs npm luarocks meson nvidia-settings python-sphinx ranger rofi alsa tree-sitter unoconv xclip xsel zathura zathura-cb zathura-djvu zathura-pdf-mupdf ripgrep uthash mesa check fd firefox-developer-edition libev xcb-util libxcb libconfig dbus dunst ufw rtorrent exa bat kitty rsync dragon mediainfo tree sxiv sxhkd trash-cli playerctl calcurse ncdu xfce-polkit neovim --needed --noconfirm
 configgit
 
 echo 'Installing Paru for managing AUR packages'
@@ -110,7 +110,7 @@ if ! command -v paru &> /dev/null; then
 fi
 echo 'Installing packages from AUR'
 # comment out: spotify, spotifyd-runit
-paru -S alacritty audacity discord obs-studio flameshot neovim python-ueberzug-git lazygit gnome-disk-utility microsoft-edge-dev-bin  neovide spotifyd spotify-tui-bin translate-shell zoxide-bin nnn-nerd python-pynvim drive-git tty-clock alsi gotop-bin nvtop volumeicon imagemagick xdotool xkblayout-state extra/moc --needed
+paru -S alacritty audacity discord obs-studio flameshot python-ueberzug-git lazygit gnome-disk-utility microsoft-edge-stable-bin  neovide spotifyd spotify-tui-bin translate-shell zoxide-git nnn-nerd python-pynvim drive-git tty-clock alsi gotop-bin nvtop volumeicon imagemagick xdotool xkblayout-state extra/moc --needed
 [ ! -d "$HOME/.nvm" ] && cd $HOME && git clone https://github.com/nvm-sh/nvm.git .nvm
 
 cp -rf $dotpath'/ranger' $HOME'/.config'
