@@ -1,0 +1,422 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" *** Shift^2 for search everything in pycharm
+" *** Ctrl^2 for run anything in pycharm
+
+let g:mapleader = " "
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" *** Vim configurations and setting up plugins ***
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set relativenumber
+set number
+set visualbell
+set splitbelow
+set splitright
+" Show current vim mode
+set showmode
+" Use the clipboard register '*' for all yank, delete, change and put operations
+" which would normally go to the unnamed register.
+set clipboard+=unnamed
+" Search as characters are entered
+set incsearch
+" Highlight search results
+set hlsearch
+" If a pattern contains an uppercase letter, searching is case sensitive,
+" otherwise, it is not.
+set ignorecase
+set smartcase
+" Emulate vim-surround. Commands: ys, cs, ds, S.
+set surround
+" https://youtrack.jetbrains.com/issue/VIM-1970
+set highlightedyank
+" https://youtrack.jetbrains.com/issue/VIM-959
+set ideamarks
+" https://github.com/JetBrains/ideavim/wiki/%60ideajoin%60-examples
+set ideajoin
+" https://youtrack.jetbrains.com/issue/VIM-1521
+set commentary
+" https://youtrack.jetbrains.com/issue/VIM-1042
+set NERDTree
+" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins#vim-paragraph-motion
+set vim-paragraph-motion
+" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins#vim-indent-object
+set textobj-indent
+" die dae cie cae
+set textobj-entire
+set exchange
+set multiple-cursors
+set easymotion
+set quickscope
+set which-key
+set notimeout
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" *** Key mapping ***
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Move Lines Up and Down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Rename all
+" Alt + R, then R (through the menu bar) also seems to work fine.
+map <leader>cr <action>(RenameElement)
+" Utility functions
+map <C-s> <action>(SelectIn)
+" Override Original vim gd
+" map <leader>d <action>(GotoImplementation)
+map gd <action>(GotoImplementation)
+" Find usages in file is Ctrl + F7.
+map <leader>fU <action>(FindUsages)
+" Show usages for symbol.
+nnoremap <leader>fu    :action ShowUsages<CR>
+vnoremap <leader>fu    :action ShowUsages<CR>
+" Fuzzy Search File
+map <leader>fp <action>(com.mituuz.fuzzier.Fuzzier)
+map <leader>fm <action>(com.mituuz.fuzzier.FuzzyMover)
+map <leader>fg <action>(com.mituuz.fuzzier.FuzzierVCS)
+" Search code in project
+nnoremap <leader>fc    :action FindInPath<CR>
+vnoremap <leader>fc    :action FindInPath<CR>
+" Alt + Insert in idea.
+map <leader>cg <action>(Generate)
+" or use gcc for comment line, or {visual}gc to comment all lines in visual block
+nnoremap <leader>/ :action CommentByLineComment<CR>
+vnoremap <leader>/ :<bs><bs><bs><bs><bs>action VimVisualSwapSelections<cr>:action CommentByLineComment<CR>
+" Use <A-n> to start multicursor
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+" Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+nmap <S-C-n> <Plug>AllWholeOccurrences
+xmap <S-C-n> <Plug>AllWholeOccurrences
+nmap g<S-C-n> <Plug>AllOccurrences
+xmap g<S-C-n> <Plug>AllOccurrences
+" Setting quick scope
+let g:qs_highlight_on_keys             = ['f', 'F', 't', 'T']
+let g:qs_accepted_chars                = ['a', 'b', 'c', 'd' , 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+let g:qs_primary_color                 = '#ff0000'
+let g:qs_secondary_color               = '#ff00ff'
+" Increase font size
+nnoremap <leader>z+    :action EditorIncreaseFontSize<CR>
+vnoremap <leader>z+    :action EditorIncreaseFontSize<CR>
+nnoremap <leader>z=    :action EditorIncreaseFontSize<CR>
+vnoremap <leader>z=    :action EditorIncreaseFontSize<CR>
+" Decrease font size
+nnoremap <leader>z-    :action EditorDecreaseFontSize<CR>
+vnoremap <leader>z-    :action EditorDecreaseFontSize<CR>
+" Reset font size
+nnoremap <leader>z0    :action EditorResetFontSize<CR>
+vnoremap <leader>z0    :action EditorResetFontSize<CR>
+" Clear search highlights.
+nnoremap <leader>h    :nohlsearch<CR>
+vnoremap <leader>h    <Esc>:nohlsearch<CR>
+" Next Tab
+nnoremap H    :action NextTab<CR>
+vnoremap H    <Esc>:action NextTab<CR>
+" Previous Tab
+nnoremap L    :action PreviousTab<CR>
+vnoremap L    <Esc>:action PreviousTab<CR>
+" Close current tab
+nnoremap <leader>q    :action CloseContent<CR>
+vnoremap <leader>q    <Esc>:action CloseContent<CR>
+" Close window
+nnoremap <leader>wd    :action CloseAllEditors<CR>
+vnoremap <leader>wd    <Esc>:action CloseAllEditors<CR>
+nnoremap <leader>wx    :action CloseAllEditors<CR>
+vnoremap <leader>wx    <Esc>:action CloseAllEditors<CR>
+" Focus window left
+nnoremap <leader>wh    <C-w>h
+vnoremap <leader>wh    <Esc><C-w>h
+nnoremap <C-h>         <C-w>h
+vnoremap <C-h>         <Esc><C-w>h
+" Focus window down
+nnoremap <leader>wj         <C-w>j
+vnoremap <leader>wj         <Esc><C-w>j
+nnoremap <C-j>    <C-w>j
+vnoremap <C-j>    <Esc><C-w>j
+" Focus window up
+nnoremap <leader>wk       <C-w>k
+vnoremap <leader>wk       <Esc><C-w>k
+nnoremap <C-k>    <C-w>k
+vnoremap <C-k>    <Esc><C-w>k
+" Focus window right
+nnoremap <leader>wl          <C-w>l
+vnoremap <leader>wl          <Esc><C-w>l
+nnoremap <C-l>    <C-w>l
+vnoremap <C-l>    <Esc><C-w>l
+" Split Horizontal
+nnoremap <leader>wnh          :split<CR>
+vnoremap <leader>wnh          <Esc>:split<CR>
+" Split Vertical
+nnoremap <leader>wnv          :vs<CR>
+vnoremap <leader>wnv          <Esc>:vs<CR>
+" Toggle NERDTree
+nnoremap <leader>e    :NERDTreeToggle<CR>
+vnoremap <leader>e    <Esc>:NERDTreeToggle<CR>
+" List errors
+nnoremap <leader>El    :action CodeInspection.OnEditor<CR>
+vnoremap <leader>El    :action CodeInspection.OnEditor<CR>
+" Go to previous error
+nnoremap <leader>EN    :action GotoPreviousError<CR>
+vnoremap <leader>EN    <Esc>:action GotoPreviousError<CR>
+" Go to next error
+nnoremap <leader>En    :action GotoNextError<CR>
+vnoremap <leader>En    <Esc>:action GotoNextError<CR>
+" Go to previous error
+nnoremap <leader>Ep    :action GotoPreviousError<CR>
+vnoremap <leader>Ep    <Esc>:action GotoPreviousError<CR>
+" Edit inspection settings
+nnoremap <leader>Es    :action PopupHector<CR>
+vnoremap <leader>Es    :action PopupHector<CR>
+" Explain error at cursor
+nnoremap <leader>Ex    :action ShowErrorDescription<CR>
+vnoremap <leader>Ex    :action ShowErrorDescription<CR>
+" Smart Align (Code -> Smart Align)
+map <leader>ca <action>(code.align)
+" Reformat a code
+map <leader>cc <action>(ReformatCode)
+" Surround a code (Ctrl+Alt+T)
+map <leader>cS <action>(SurroundWith)
+" Easymotion
+nmap <leader>j <Plug>(easymotion-jumptoanywhere)
+" Show Color Picker
+nnoremap <leader>uc    :action ShowColorPicker<CR>
+vnoremap <leader>uc    :action ShowColorPicker<CR>
+" Rename file
+nnoremap <leader>ur    :action RenameFile<CR>
+vnoremap <leader>ur    :action RenameFile<CR>
+" Show key bindings
+nnoremap <leader>?     :map<CR>
+vnoremap <leader>?     <Esc>:map<CR>
+" Activate terminal window
+nnoremap <leader>'    :action ActivateTerminalToolWindow<CR>
+vnoremap <leader>'    :action ActivateTerminalToolWindow<CR>
+" Open a new terminal window (use :! for a single shell cmd)
+nnoremap <leader>!    :action Terminal.OpenInTerminal<CR>
+vnoremap <leader>!    :action Terminal.OpenInTerminal<CR>
+" Increment number.
+" As usual you can press '.' to repeat this action again.
+nnoremap <leader>u+    <C-a>
+vnoremap <leader>u+    <C-a>
+nnoremap <leader>u=    <C-a>
+vnoremap <leader>u=    <C-a>
+" Decrement number.
+" As usual you can press '.' to repeat this action again.
+nnoremap <leader>u-    <C-x>
+vnoremap <leader>u-    <C-x>
+" Check git local changes
+nnoremap <leader>gs    :action Vcs.Show.Local.Changes<CR>
+vnoremap <leader>gs    :action Vcs.Show.Local.Changes<CR>
+nnoremap <leader>gc    :action Git.Clone<CR>
+vnoremap <leader>gc    :action Git.Clone<CR>
+nnoremap <leader>gh    :action Vcs.ShowTabbedFileHistory<CR>
+vnoremap <leader>gh    :action Vcs.ShowTabbedFileHistory<CR>
+nnoremap <leader>gi    :action Git.Init<CR>
+vnoremap <leader>gi    :action Git.Init<CR>
+nnoremap <leader>gP    :action Vcs.UpdateProject<CR>
+vnoremap <leader>gP    :action Vcs.UpdateProject<CR>
+nnoremap <leader>ga    :action Annotate<CR>
+vnoremap <leader>ga    :action Annotate<CR>
+nnoremap <leader>gl    :action Vcs.Show.Log<CR>
+vnoremap <leader>gl    :action Vcs.Show.Log<CR>
+nnoremap <leader>gb    :action Git.Branches<CR>
+vnoremap <leader>gb    :action Git.Branches<CR>
+nnoremap <leader>gG    :action ActivateVersionControlToolWindow<CR>
+vnoremap <leader>gG    :action ActivateVersionControlToolWindow<CR>
+nnoremap <leader>gg    :action Vcs.QuickListPopupAction<CR>
+vnoremap <leader>gg    :action Vcs.QuickListPopupAction<CR>
+nnoremap <leader>gp    :action Vcs.Push<cr>
+vnoremap <leader>gp    :action Vcs.Push<cr>
+nnoremap <leader>gS    :action Vcs.Show.Shelf<CR>
+vnoremap <leader>gS    :action Vcs.Show.Shelf<CR>
+" Show file changes history
+nnoremap <leader>uh    :action LocalHistory.ShowHistory<CR>
+vnoremap <leader>uh    :action LocalHistory.ShowHistory<CR>
+" View Breakpoints
+nnoremap <leader>dB    :action ViewBreakpoints<CR>
+vnoremap <leader>dB    <Esc>:action ViewBreakpoints<CR>
+" Toggle breakpoint
+nnoremap <leader>db    :action ToggleLineBreakpoint<CR>
+vnoremap <leader>db    <Esc>:action ToggleLineBreakpoint<CR>
+" Clear all breakpoints
+nnoremap <leader>dC    :action Debugger.RemoveAllBreakpointsInFile<CR>
+vnoremap <leader>dC    <Esc>:action Debugger.RemoveAllBreakpointsInFile<CR>
+" Continue (Go to next breakpoint). 'c' is the same as gdb.
+nnoremap <leader>dc    :action Resume<CR>
+vnoremap <leader>dc    <Esc>:action Resume<CR>
+" Debug class
+nnoremap <leader>dD    :action DebugClass<CR>
+vnoremap <leader>dD    <Esc>:action DebugClass<CR>
+" Debug
+nnoremap <leader>dd    :action Debug<CR>
+vnoremap <leader>dd    <Esc>:action Debug<CR>
+" Next (Step over). 's' is the same as gdb
+nnoremap <leader>dn    :action StepOver<CR>
+vnoremap <leader>dn    <Esc>:action StepOver<CR>
+" Step out (same as "finish" in gdb).
+nnoremap <leader>do    :action StepOut<CR>
+vnoremap <leader>do    <Esc>:action StepOut<CR>
+" Select configuration and debug
+nnoremap <leader>dr    :action ChooseDebugConfiguration<CR>
+vnoremap <leader>dr    <Esc>:action ChooseDebugConfiguration<CR>
+" Step (Step into). 's' is the same as gdb.
+nnoremap <leader>ds    :action StepInto<CR>
+vnoremap <leader>ds    <Esc>:action StepInto<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" *** Which-key desc ***
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:WhichKeyDesc_Line_Comment                   = "<leader>/ Comment or Uncomment"
+let g:WhichKeyDesc_Commentary_prefix              = "gc"
+let g:WhichKeyDesc_Commentary_action              = "gcc"
+let g:WhichKey_ShowVimActions                     = "true"
+let g:WhichKeyDesc_Windows_Maximize               = "<leader>wm Maximize"
+let g:WhichKeyDesc_Windows                        = "<leader>w  Windows"
+let g:WhichKeyDesc_Windows_Delete                 = "<leader>wd Delete"
+let g:WhichKeyDesc_Windows_Split                  = "<leader>ws split below"
+let g:WhichKeyDesc_Zoom                           = "<leader>z Zoom"
+let g:WhichKeyDesc_Zoom_Increase                  = "<leader>z+ Increase"
+let g:WhichKeyDesc_Zoom_IncreaseAlt               = "<leader>z= Increase"
+let g:WhichKeyDesc_Zoom_Decrease                  = "<leader>z- Decrease"
+let g:WhichKeyDesc_Zoom_Reset                     = "<leader>z0 Reset"
+let g:WhichKeyDesc_ClearHighlight                 = "<leader>h Clear highlight"
+let g:WhichKeyDesc_Windows_DeleteWindow           = "<leader>wd Delete window"
+let g:WhichKeyDesc_Windows_DeleteWindowX          = "<leader>wx Delete window"
+let g:WhichKeyDesc_Windows_WindowLeft             = "<leader>wh Window left"
+let g:WhichKeyDesc_Windows_WindowDownJ            = "<leader>wj Window down"
+let g:WhichKeyDesc_Windows_WindowUpK              = "<leader>wk Window up"
+let g:WhichKeyDesc_Windows_WindowRightL           = "<leader>wl Window right"
+let g:WhichKeyDesc_Windows_New                    = "<leader>wn New window"
+let g:WhichKeyDesc_Windows_NewHorizontal          = "<leader>wnh Horizontal"
+let g:WhichKeyDesc_Windows_NewVertical            = "<leader>wnv Vertical"
+let g:WhichKeyDesc_NERDTree_Spawn                 = "<leader>e   NERDTree"
+let g:WhichKeyDesc_Errors                         = "<leader>E Errors"
+let g:WhichKeyDesc_Errors_ListErrors              = "<leader>El List errors"
+let g:WhichKeyDesc_Errors_PreviousError           = "<leader>EN Previous error"
+let g:WhichKeyDesc_Errors_NextError               = "<leader>En Next error"
+let g:WhichKeyDesc_Errors_PreviousErrorAlt        = "<leader>Ep Previous error"
+let g:WhichKeyDesc_Errors_OpenInspectionSettings  = "<leader>Es Inspection settings"
+let g:WhichKeyDesc_Errors_ExplainError            = "<leader>Ex Explain error"
+let g:WhichKeyDesc_Find                           = "<leader>f Find"
+let g:WhichKeyDesc_Find_ShowUsages                = "<leader>fu Code usages"
+let g:WhichKeyDesc_Find_InPath                    = "<leader>fc Find code in project"
+let g:WhichKeyDesc_Find_FindUsages                = "<leader>fU Code usages in detials"
+let g:WhichKeyDesc_Find_FuzzySearch               = "<leader>fp Fuzzy search project"
+let g:WhichKeyDesc_Find_FuzzyVCS                  = "<leader>fg Fuzzy search only VCS tracked file "
+let g:WhichKeyDesc_Find_FuzzyMover                = "<leader>fm Fuzzy file mover"
+let g:WhichKeyDesc_Code                           = "<leader>c Code"
+let g:WhichKeyDesc_Code_RenameAll                 = "<leader>cr Rename all"
+let g:WhichKeyDesc_Code_Reformat                  = "<leader>cc Reformat"
+let g:WhichKeyDesc_Code_SmartAlign                = "<leader>ca Smart align"
+let g:WhichKeyDesc_Code_Generate                  = "<leader>cg Generate"
+let g:WhichKeyDesc_Code_Surround                  = "<leader>cs Surround"
+let g:WhichKeyDesc_Code_SurroundS                 = "<leader>cS Surround Pycharm Version"
+" let :WhichKeyDesc_Goto_Implementation            = "<leader>gd Go to implementation"
+let g:WhichKeyDesc_Easymotion                     = "<leader><leader> Easymotion"
+let g:WhichKeyDesc_KillBuffer                     = "<leader>q Kill Buffer"
+let g:WhichKeyDesc_JumpToAnywhere                 = "<leader>j Jump to anywhere"
+let g:WhichKeyDesc_Utility                        = "<leader>u Utility"
+let g:WhichKeyDesc_Utility_ShowColorPicker        = "<leader>uc Color picker"
+let g:WhichKeyDesc_Utility_RenameFile             = "<leader>ur Rename file"
+let g:WhichKeyDesc_Help_ShowKeyBindings           = "<leader>? Help"
+let g:WhichKeyDesc_Leader_OpenShell               = "<leader>! New terminal"
+let g:WhichKeyDesc_Leader_OpenShell2              = "<leader>' Activate terminal"
+let g:WhichKeyDesc_Utility_IncrementNumber        = "<leader>u+ Increment number"
+let g:WhichKeyDesc_Utility_IncrementNumberAlt     = "<leader>u= Increment number"
+let g:WhichKeyDesc_Utility_DecrementNumber        = "<leader>u- Decrement number"
+let g:WhichKeyDesc_Utility_ShowHistory            = "<leader>uh Show file changed history"
+let g:WhichKeyDesc_GitVcs                         = "<leader>g Git"
+let g:WhichKeyDesc_GitVcs_Clone                   = "<leader>gc Clone"
+let g:WhichKeyDesc_GitVcs_File_Log                = "<leader>gh File log"
+let g:WhichKeyDesc_GitVcs_Log                     = "<leader>gl Log"
+let g:WhichKeyDesc_GitVcs_Init                    = "<leader>gi Init"
+let g:WhichKeyDesc_GitVcs_Vcs_Pull                = "<leader>gP Pull"
+let g:WhichKeyDesc_GitVcs_Vcs_Annotate            = "<leader>ga Annotate"
+let g:WhichKeyDesc_GitVcs_Stat                    = "<leader>gs Status"
+let g:WhichKeyDesc_GitVcs_Branches                = "<leader>gb Branches"
+let g:WhichKeyDesc_GitVcs_ShowWindow              = "<leader>gG Show window"
+let g:WhichKeyDesc_GitVcs_SelectOperation         = "<leader>gg Select operations"
+let g:WhichKeyDesc_GitVcs_Push                    = "<leader>gp Push"
+let g:WhichKeyDesc_GitVcs_Shelf                   = "<leader>gS Shelf"
+let g:WhichKeyDesc_Debug                          = "<leader>d Debug"
+let g:WhichKeyDesc_Debug_ViewBreakpoints          = "<leader>dB View breakpoints"
+let g:WhichKeyDesc_Debug_ToggleBreakpoint         = "<leader>db Toggle breakpoint"
+let g:WhichKeyDesc_Debug_ClearAllBreakpoints      = "<leader>dC Clear all breakpoints"
+let g:WhichKeyDesc_Debug_Continue                 = "<leader>dc Continue"
+let g:WhichKeyDesc_Debug_DebugClass               = "<leader>dD Debug class"
+let g:WhichKeyDesc_Debug_Debug                    = "<leader>dd Debug"
+let g:WhichKeyDesc_Debug_StepOver                 = "<leader>dn Step over"
+let g:WhichKeyDesc_Debug_StepOut                  = "<leader>do Step out"
+let g:WhichKeyDesc_Debug_SelectDebugConfiguration = "<leader>dr Select debug configuration"
+let g:WhichKeyDesc_Debug_StepInto                 = "<leader>ds Step into"
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Useful Informations
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Ctrl + h, j, k, l  or <leader> + w + h, j, k, l to focus split pane
+" Shift + h, k to focus buffer
+" <leader> + w + d  or <leader> + c to close buffer
+" <leader> + w + n + h, v to split horizontal or vertical
+
+" ### Supported commands
+"
+" - `:NERDTree`
+" - `:NERDTreeFocus`
+" - `:NERDTreeToggle`
+" - `:NERDTreeClose`
+" - `:NERDTreeFind`
+" - `:NERDTreeRefreshRoot`
+"
+" | Key     |  Description                                            |  Map Setting                   |
+" |---------|---------------------------------------------------------|--------------------------------|
+" | `o`     |  Open files, directories and bookmarks                  | `g:NERDTreeMapActivateNode`    |
+" | `go`    |  Open selected file, but leave cursor in the NERDTree   | `g:NERDTreeMapPreview`         |
+" | `t`     |  Open selected node/bookmark in a new tab               | `g:NERDTreeMapOpenInTab`       |
+" | `T`     |  Same as 't' but keep the focus on the current tab      | `g:NERDTreeMapOpenInTabSilent` |
+" | `i`     |  Open selected file in a split window                   | `g:NERDTreeMapOpenSplit`       |
+" | `gi`    |  Same as i, but leave the cursor on the NERDTree        | `g:NERDTreeMapPreviewSplit`    |
+" | `s`     |  Open selected file in a new vsplit                     | `g:NERDTreeMapOpenVSplit`      |
+" | `gs`    |  Same as s, but leave the cursor on the NERDTree        | `g:NERDTreeMapPreviewVSplit`   |
+" | `O`     |  Recursively open the selected directory                | `g:NERDTreeMapOpenRecursively` |
+" | `x`     |  Close the current nodes parent                         | `g:NERDTreeMapCloseDir`        |
+" | `X`     |  Recursively close all children of the current node     | `g:NERDTreeMapCloseChildren`   |
+" | `P`     |  Jump to the root node                                  | `g:NERDTreeMapJumpRoot`        |
+" | `p`     |  Jump to current nodes parent                           | `g:NERDTreeMapJumpParent`      |
+" | `K`     |  Jump up inside directories at the current tree depth   | `g:NERDTreeMapJumpFirstChild`  |
+" | `J`     |  Jump down inside directories at the current tree depth | `g:NERDTreeMapJumpLastChild`   |
+" | `<C-J>` |  Jump down to next sibling of the current directory     | `g:NERDTreeMapJumpNextSibling` |
+" | `<C-K>` |  Jump up to previous sibling of the current directory   | `g:NERDTreeMapJumpPrevSibling` |
+" | `r`     |  Recursively refresh the current directory              | `g:NERDTreeMapRefresh`         |
+" | `R`     |  Recursively refresh the current root                   | `g:NERDTreeMapRefreshRoot`     |
+" | `m`     |  Display the NERDTree menu                              | `g:NERDTreeMapMenu`            |
+" | `q`     |  Close the NERDTree window                              | `g:NERDTreeMapQuit`            |
+" | `A`     |  Zoom (maximize/minimize) the NERDTree window           | `g:NERDTreeMapToggleZoom`      |
+
