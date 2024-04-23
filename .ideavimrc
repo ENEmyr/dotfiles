@@ -29,7 +29,7 @@ set hlsearch
 " otherwise, it is not.
 set ignorecase
 set smartcase
-" Emulate vim-surround. Commands: ys, cs, ds, S.
+" Emulate vim-surround. Commands: ys, cs, ds, S. Docs : https://github.com/tpope/vim-surround
 set surround
 " https://youtrack.jetbrains.com/issue/VIM-1970
 set highlightedyank
@@ -284,6 +284,8 @@ vnoremap <leader>dr    <Esc>:action ChooseDebugConfiguration<CR>
 " Step (Step into). 's' is the same as gdb.
 nnoremap <leader>ds    :action StepInto<CR>
 vnoremap <leader>ds    <Esc>:action StepInto<CR>
+" New file
+map <leader>un :action NewFile<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " *** Which-key desc ***
@@ -342,6 +344,7 @@ let g:WhichKeyDesc_JumpToAnywhere                 = "<leader>j Jump to anywhere"
 let g:WhichKeyDesc_Utility                        = "<leader>u Utility"
 let g:WhichKeyDesc_Utility_ShowColorPicker        = "<leader>uc Color picker"
 let g:WhichKeyDesc_Utility_RenameFile             = "<leader>ur Rename file"
+let g:WhichKeyDesc_Utility_NewFile                = "<leader>un New file"
 let g:WhichKeyDesc_Help_ShowKeyBindings           = "<leader>? Help"
 let g:WhichKeyDesc_Leader_OpenShell               = "<leader>! New terminal"
 let g:WhichKeyDesc_Leader_OpenShell2              = "<leader>' Activate terminal"
