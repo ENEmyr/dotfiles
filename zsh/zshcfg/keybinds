@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+# vi mode
+bindkey -v
+# Use vim keys in tab complete menu:
+bindkey -v '^?' backward-delete-char
+bindkey -M vicmd '^S' sudo-command-line
+# bindkey '^[[Z' autosuggest-accept # shift-tab to accept ghost text, deprecated use vi mode -> l instead
+
+# # Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+

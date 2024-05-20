@@ -1,0 +1,88 @@
+#!/bin/zsh
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	mkd="mkdir -pv" \
+	ffmpeg="ffmpeg -hide_banner"
+
+alias \
+	f="$FILE" \
+	e="$EDITOR" \
+	v="$EDITOR" \
+	xcp="xclip -selection clipboard"
+
+alias \
+	dc="discord &>/dev/null & disown" \
+	tg="telegram-desktop &>/dev/null & disown"
+
+#Set bookmarks dir
+# To add any bookmark, use command below without quotes:
+# bm 'bookmarkdir' '@bookmarkname' OR bm @bookmarkname to bookmark current directory
+[[ -d "$ZSHCFG/bookmarks" ]] && export CDPATH=".:$ZSHCFG/bookmarks:/" &&
+	alias jmp="cd -P"
+
+alias ls="ls --color"
+if [ -x "$(command -v eza)" ]; then
+	if git rev-parse --is-inside-work-tree &>/dev/null; then
+		alias ll="eza --long --group --header --git --icons"
+		alias lt="eza --long --group --header --git --icons --tree --level $argv"
+		alias lla="eza --long --all --group --header --git --icons"
+		alias lta="eza --long --all --group --header --git --icons --tree --level $argv"
+	else
+		alias ll="eza --long --group --header --icons"
+		alias lt="eza --long --group --header --icons --tree --level $argv"
+		alias lla="eza --long --all --group --header --icons"
+		alias lta="eza --long --all --group --header --icons --tree --level $argv"
+	fi
+fi
+
+[ -x "$(command -v bat)" ] && alias cat=bat # bat is the smarter cat with syntax highlighting
+alias cl="clear"
+
+[ -x "$(command -v nnn)" ] && alias n='nnn -x -c -P t'
+[ -f "$HOME/Scripts/spt.sh" ] && alias spt='sh ~/Scripts/spt.sh'
+[ -x "$(command -v obsidian)" ] && alias memo="obsidian"
+#alias="dwmcomp 'sudo rm ~/.config/dwm/config.h && sudo make install'"
+
+#Recent Installed Packages
+alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
+alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
+alias z="cd"
+
+#Cleanup orphaned packages
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
+alias fix-permissions="sudo chown -R $USER:$USER ~/.config ~/.local"
+
+# these following aliases should be abbreviated like in fish config
+# abbr lock "sh ~/Scripts/lock.sh"
+alias lockset="betterlockscreen --dim 40 --blur 0.8 --display 1 -u ~/Pictures/Wallpapers/EnGkmKCVcAE8ulC.jpg --time-format '%H:%M:%S' --show-layout"
+alias lock="betterlockscreen --lock"
+alias scg="$EDITOR $HOME/.zshrc"
+alias dwmcg="$EDITOR $HOME/.config/phyos/pdwm/dwm-conf.c"
+alias awscg="$EDITOR $HOME/.config/awesome/rc.lua"
+alias kcg="$EDITOR $HOME/.config/kitty/kitty.conf"
+alias v="$EDITOR"
+alias nv="$EDITOR"
+alias vi="sh ~/Scripts/neovide_launcher"
+alias term="kitty"
+alias free="free -m"
+alias spacetree="ncdu"
+alias cdd="cd /mnt/DataStorageII"
+alias cde="cd /mnt/DataStorage"
+alias r="ranger"
+alias to="touch"
+alias fk="fuck"
+alias xkb="setxkbmap -rules evdev -model pc104 -layout us,th -option grp:alt_shift_toggle &"
+alias lzg="lazygit"
+alias mixer="alsamixer"
+alias plbr="polybar-msg cmd restart"
+alias clocksync="sudo ntpd -qg"
+alias lpaccaches="ll /var/cache/pacman/pkg"
+alias lparcaches="lta 2 ~/.cache/paru/clone"
+alias carlendar="calcurse"
